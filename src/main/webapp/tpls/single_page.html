@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	 <link rel="shortcut icon" href="<zdw:tpl_path/>/imgs/favicon.ico" type="image/x-icon">
+   <title><zdw:field name="clntitle"/></title>
+    <meta name="keywords" content="<zdw:field name='clnkeywords'/>" />
+    <meta name="description" content="<zdw:field name='clndesc'/>" />
+    <link href="<zdw:tpl_path/>/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<zdw:tpl_path/>/style/common.css" rel="stylesheet">
+    <link href="<zdw:tpl_path/>/style/single_page.css" rel="stylesheet">
+     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+  	<zdw:include file="head.html"/>
+  	<div class="container"> 
+		<ol class="breadcrumb">		
+		<zdw:pathlist>
+		 <li><a href='<zdw:path name="link"/>'><zdw:path name="name"/></a></li>
+		 </zdw:pathlist> 
+		</ol> 
+	 	 <div>
+	        <div  class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+	        	<span id="left_cont">
+		            <h2><zdw:field name="name"/></h2>
+		            <p><zdw:content/></p>
+	            </span>
+	        </div>
+	        <div class="col-lg-3  col-md-3  col-sm-3 hidden-xs">
+	            <h2>快速通道</h2>  
+	            <ul class="nav nav-tabs nav-stacked">
+			         <zdw:clnlist type="list">
+				    	<li><a href="<zdw:field name='url'/>"><zdw:field name="name"/></a></li>
+				    </zdw:clnlist>	
+			    </ul>  
+	        </div>
+	    </div>
+		<zdw:include file="foot.html"/>
+	</div>
+  </body>
+</html>

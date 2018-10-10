@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.lzzcms.model">
+    <class name="ColumnType" table="lzz_columntype" dynamic-update="true" dynamic-insert="true" >
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="typeName" type="string" length="30"  column="typename"/>
+        <property name="enName" type="string" length="30"  column="enname"/>
+    </class>
+</hibernate-mapping>
+

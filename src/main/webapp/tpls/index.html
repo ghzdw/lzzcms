@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	 <link rel="shortcut icon" href="<zdw:tpl_path/>/imgs/favicon.ico" type="image/x-icon">
+    <title><zdw:field name="indextitle"/></title>
+	<meta name="keywords" content="<zdw:field name='indexkeys'/>" />
+    <meta name="description" content="<zdw:field name='indexdesc'/>" />
+    <link href="<zdw:tpl_path/>/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<zdw:tpl_path/>/style/common.css" rel="stylesheet">
+    <link href="<zdw:tpl_path/>/style/index.css" rel="stylesheet">
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  </head>
+<body>
+<div class="container-fluid">
+  <section class="row topsec">
+   <zdw:include file="head.html"/>
+  	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  	   <ol class="breadcrumb">	
+			<zdw:pathlist>
+			  <li><a href='<zdw:path name="link"/>'><zdw:path name="name"/></a></li>
+			</zdw:pathlist> 
+			<li class="download">
+				<a href="<zdw:global_field name='lzzcms_downloadurl'/>">下载最新版乐之者内容管理系统(乐之者cms)</a>
+			</li>
+	   </ol> 
+  	</div>
+   </section>
+   <div class="row">
+	<section id="left" class="col-lg-2 hidden-md hidden-xs hidden-sm">
+      <div class="btn-group-vertical">
+      	<button type="button" class="btn btn-default">
+				<div>所有内容</div>
+		</button>
+      	<zdw:clnlist type="list">
+      		<button type="button" class="btn btn-default alignleft">
+				<div>
+					<a title='<zdw:field  name="name"/>' href='<zdw:field name="url"/>'>
+						<zdw:field len="17" append="..." sensitive="yes" name="name"/>[共<zdw:field name="docnum"/>篇]
+					</a>
+				</div>
+			</button>
+      	</zdw:clnlist>
+      </div>
+ 	</section>
+	<section id="cont" class="col-md-10">
+	     <div class="row paddingbottom">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+ 				  <section  class="tagstyle">最新发布</section>
+     			 <zdw:doclist count="8" sortby="publishdate" sort="desc" columns="all">
+	      			<div class="newestitem">
+	      				<div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 minusleft"><zdw:field name='comm_modifydate'/></div>
+	      				<div class="col-lg-9  col-md-8  col-sm-8 col-xs-8 minusleft">
+	      				<a title='<zdw:field  name="comm_title"/>' href="<zdw:field name='docurl'/>">
+	      					<zdw:field name="comm_title" sensitive="yes" len="50" append="..."/>
+	      				</a></div>
+	      			</div>
+      			 </zdw:doclist>
+			</div>		
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+   					<section  class="tagstyle inline">头条动态</section>
+     				<zdw:doclist count="1" flag="h"  sortby="publishdate" sort="desc">
+	      				<h4 class="headonetitle"><a href="<zdw:field name='docurl'/>"><zdw:field name="comm_title"/></a></h4>
+	      				<p  class="headonebody"><zdw:field name="comm_intro" len="100" append="..."/></p>
+      			    </zdw:doclist>	
+     				<section  class="tagstyle">最多阅读</section>
+     			 <zdw:doclist count="4" sortby="click" sort="desc" columns="all">
+	      			<div class="mostreaditem">
+	      				<div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 minusleft"><zdw:field name='comm_modifydate'/></div>
+	      				<div class="col-lg-9  col-md-8  col-sm-8 col-xs-8">
+	      				<a href="<zdw:field name='docurl'/>" title='<zdw:field  name="comm_title"/>'>
+	      				  <zdw:field name="comm_title" sensitive="yes" len="50" append="..."/></a></div>
+	      			</div>
+      			 </zdw:doclist>
+		    </div>	
+		</div>	
+		<div class="row contcontainer">
+			<zdw:clnlist type="list">
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<div   class="panel panel-default paenlheight">
+					  <div class="panel-heading"><zdw:field name="name"/>
+					  	<span style="float:right">
+					  		<a href="<zdw:field name='url'/>">更多<i class="iconfont posmore">&#xe668;</i></a>
+					  	</span>
+					  </div>
+					  <div class="panel-body">
+					  	<zdw:doclist count="9" sortby="publishdate"  sort="desc">
+					  		<div class="row">
+								<div class="col-lg-3 col-md-4 col-sm-4 col-xs-4">
+									<span class="contdate"><zdw:field name="comm_modifydate"/></span>
+								</div>
+								<div class="col-lg-9  col-md-8  col-sm-8 col-xs-8">
+									<a href="<zdw:field name='docurl'/>">
+									<span class="conttitle" title='<zdw:field  name="comm_title"/>'>
+										<zdw:field name="comm_title" sensitive="yes" len="50" append="..."/>
+									</span></a>
+								</div>
+						    </div>
+					 	</zdw:doclist>
+					  </div>
+					</div>
+				</div>
+			</zdw:clnlist>	
+		</div>
+	</section>
+    </div>
+		<zdw:include file="foot.html"/>
+   </div>		
+  </body>
+</html>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context 
+           http://www.springframework.org/schema/context/spring-context-4.0.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+    
+	<context:component-scan base-package="com.lzzcms">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"></context:exclude-filter>
+	</context:component-scan>
+
+	<context:property-placeholder location="classpath:param.properties" />
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${c3p0.driverClass}" />
+		<property name="jdbcUrl" value="${c3p0.jdbcUrl}" />
+		<property name="user" value="${c3p0.user}" />
+		<property name="password" value="${c3p0.password}" />
+		<property name="maxPoolSize" value="${c3p0.maxPoolSize}" />
+		<property name="minPoolSize" value="${c3p0.minPoolSize}" />
+		<property name="initialPoolSize" value="${c3p0.initialPoolSize}" />
+		<property name="acquireIncrement" value="${c3p0.acquireIncrement}" />
+		<!-- mysql默认28800s/60/60=8h后单方面关闭空闲连接,c3p0默认经过600万秒才释放 -->
+		<property name="idleConnectionTestPeriod" value="28000" />
+		<property name="maxIdleTime" value="28000" />
+		<!-- basic都有验证，c3p0应该也有
+			<property name="validationQuery" value="${c3p0.validationQuery} " />
+		-->
+	</bean>
+	<bean id="poolCfg" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="testOnBorrow" value="true"></property>
+		<property name="testOnReturn" value="false"></property>
+		<property name="testWhileIdle" value="false"></property>
+		<property name="maxIdle" value="50"></property>
+		<!-- 		<property name="minIdle" value="1"></property> -->
+		<!-- 		<property name="maxActive" value="100"></property> -->
+		<!-- 		<property name="maxTotal" value="20"></property> -->
+		<property name="maxWaitMillis" value="2000"></property>
+		<!-- 		<property name="numTestsPerEvictionRun" value="2"></property> -->
+		<!-- 		<property name="timeBetweenEvictionRunsMillis" value="2"></property> -->
+		<!-- 		<property name="minEvictableIdleTimeMillis" value="2"></property> -->
+	</bean>
+	<bean id="jedisPool" class="redis.clients.jedis.JedisPool" destroy-method="destroy" depends-on="poolCfg">
+		<constructor-arg name="poolConfig" ref="poolCfg" />
+		<constructor-arg name="host" value="${redis.host}" />
+		<constructor-arg name="port" value="${redis.port}" />
+		<constructor-arg name="password" value="#{'${redis.pass}'!=''?'${redis.pass}':null}" />
+		<constructor-arg name="database" value="#{'${redis.database}'!=''?'${redis.database}':0}" />
+		<constructor-arg name="timeout" value="${redis.timeout}" />
+	</bean>
+
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="hibernateProperties">
+			<value>
+				hibernate.dialect=${dia}
+				hibernate.hbm2ddl.auto=none
+				hibernate.show_sql=false
+				hibernate.format_sql=false
+			</value>
+		</property>
+		<property name="mappingDirectoryLocations">
+			<list>
+				<value>classpath:com/lzzcms/hbm</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+		<constructor-arg ref="dataSource" />
+	</bean>
+	<bean id="executor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="6" />
+		<property name="maxPoolSize" value="20" />
+		<property name="keepAliveSeconds" value="300" />
+		<property name="queueCapacity" value="25" />
+		<property name="rejectedExecutionHandler">
+			<bean class="java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy" />
+		</property>
+	</bean>
+
+	<bean id="txManage" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 配置事务的作用方法,相当于在很多方法上写了@Transaction注解 -->
+	<tx:advice id="txAdvice" transaction-manager="txManage">
+		<tx:attributes>
+			<tx:method name="save*" propagation="REQUIRED" isolation="DEFAULT" timeout="-1"/>
+			<tx:method name="delete*" propagation="REQUIRED" isolation="DEFAULT" />
+			<tx:method name="update*" propagation="REQUIRED" isolation="DEFAULT" />
+			<tx:method name="execute*" propagation="REQUIRED" isolation="DEFAULT" />
+			<tx:method name="find*" propagation="REQUIRED" isolation="DEFAULT" read-only="true" />
+			<tx:method name="query*" propagation="REQUIRED" isolation="DEFAULT" read-only="true" />
+			<tx:method name="get*" propagation="REQUIRED" isolation="DEFAULT" read-only="true" />
+			<!-- 为了以防方法不按规则来写 -->
+			<tx:method name="*" propagation="REQUIRED" isolation="DEFAULT" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<aop:advisor advice-ref="txAdvice" pointcut="execution(public * com.lzzcms.service.*Service.*(..))" />
+	</aop:config>
+
+	<!-- 定时采集任务	 -->
+	<bean id="spiderJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="spiderTask" />
+		<property name="targetMethod" value="spiderAuto" />
+	</bean>
+	<bean id="spiderJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="spiderJob" />
+		<!-- 秒  分  时  天 月 周  年，linux的掐头去尾  -->
+		<property name="cronExpression" value="${spiderJobCron}" />
+	</bean>
+	<bean id="updateClickJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="updateClickTask" />
+		<property name="targetMethod" value="updateClick" />
+	</bean>
+	<bean id="updateClickTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="updateClickJob" />
+		<!-- 秒  分  时  天 月 周  年，linux的掐头去尾  -->
+		<property name="cronExpression" value="${updateClickCron}" />
+	</bean>
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="spiderJobTrigger" />
+				<ref bean="updateClickTrigger" />
+			</list>
+		</property>
+	</bean>
+</beans>

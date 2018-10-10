@@ -1,0 +1,1 @@
+@charset "utf-8";.contdate,.conttitle{height:18px;line-height:18px;display:inline-block;}.conttitle{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:140px;}@media (min-width:768px){.conttitle{width:180px;}}@media (min-width:992px){.conttitle{width:180px;}}@media screen and (min-width:1200px){.conttitle{width:295px;}}

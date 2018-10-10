@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.lzzcms.model">
+    <class name="DownLoadStatistics" table="lzz_download">
+       <composite-id>
+            <key-property name="downDate" column="downdate" type="java.util.Date" ></key-property>
+            <key-property name="softName" column="softname" type="java.lang.String" ></key-property>
+            <key-property name="ip" column="ip" type="java.lang.String" ></key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

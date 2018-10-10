@@ -1,0 +1,101 @@
+@charset "utf-8";
+.jumbotron-h1{
+	font-size:22px;
+}
+.jumbotron-h4{
+	font-size:14px;
+}
+.about{
+	background-color:#fff;
+	padding-left:0;
+}
+.about h4{
+	color:#333;
+	border-bottom: 1px solid #ccc;
+	font-size: 18px;
+	padding: 20px 0;
+	margin: 0 0 10px 0;
+}
+.about section.cont{
+	font-size: 13px;
+	line-height: 2;
+}
+.jumbotron{
+	background: url("../imgs/info_jumbotron_bg.png");
+	margin-bottom: 5px;
+}
+section.cont{
+	text-indent: 1cm;
+}
+section.cont img{
+	width:30px;
+}
+section.cont img.bigimg{
+	width:80px;
+}
+ul{
+	list-style: none;
+}
+.declare{
+	display:block;
+}
+ul li,.declare{
+	font-size: 0.9em;
+}
+.bigcatalog{
+	font-weight: bold;
+}
+a{
+	color:blue;
+}
+.change{
+	border-left: 1px solid #ccc;
+	display: inline-block;
+	padding-left: 3px;
+}
+.paddingleft{
+	padding-left: 20px;
+}
+/*媒体查询要写在最后面*/
+@media (min-width:768px){
+	.jumbotron-h1{
+		font-size:26px;
+	}
+	.jumbotron-h4{
+		font-size:22px;
+	}
+	.about h4{
+		font-size: 22px;
+	}
+	.about section.cont{
+		font-size: 14px;
+	}
+}
+@media (min-width:992px){
+	.jumbotron-h1{
+		font-size:29px;
+	}
+	.jumbotron-h4{
+		font-size:24px;
+	}
+	.about h4{
+		font-size: 24px;
+	}
+	.about section.cont{
+		font-size: 15px;
+	}
+}
+@media (min-width:1200px){
+	.jumbotron-h1{
+		font-size:31px;
+	}
+	.jumbotron-h4{
+		font-size:26px;
+	}
+	.about h4{
+		font-size: 26px;
+	}
+	.about section.cont{
+		font-size: 16px;
+	}
+}

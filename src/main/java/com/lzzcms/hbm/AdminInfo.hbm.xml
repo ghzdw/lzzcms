@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.lzzcms.model">
+    <class name="AdminInfo" table="lzz_admininfo" >
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="userName" type="string" length="30" column="username"/>
+        <property name="realName" type="string" length="30" column="realname"/>
+        <property name="pWord" type="string" length="30" column="pword"/>
+        <set name="roles"  table="link_admin_role"  >
+	        <key column="admin_id"></key>
+	        <many-to-many class="Role" column="role_id"></many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
+

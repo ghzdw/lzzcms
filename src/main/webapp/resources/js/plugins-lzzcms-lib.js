@@ -1,0 +1,116 @@
+(function($){
+	//用户管理页面的用户表格
+	$.fn.adminInfoGrid=function(){
+		this.datagrid({
+			striped:true,
+			rownumbers:true,
+			pagination:true,
+			pageList:[10,20,30],
+			pageSize:20,
+			method:"post",
+			height:400,
+			width:420,
+			singleSelect:true,
+		    columns:[[    
+		        {field:'ck',checkbox:true},    
+		        {field:'id',title:'编号',halign:'center',sortable:true,resizable:true,width:50},    
+		        {field:'username',title:'用户名',halign:'center',sortable:true,resizable:true,width:150},    
+		        {field:'realname',title:'真实名称',halign:'center',sortable:true,resizable:true,width:150}
+		    ]],    
+			url:"listAdmins",
+			onSelect:function(rowIndex, rowData){
+				$("#adminName").text(rowData.username);
+				 $("#roleInfoGrid").datagrid("unselectAll");
+					$.ajax({
+						type:"post",
+						url:"getRolesByAdminId",
+						data:{adminId:rowData.id},
+						success:function(data,status){
+							var rows=$("#roleInfoGrid").datagrid("getRows");
+							$.each(rows,function(index,onerow){
+								for(var a=0;a<data.length;a++){
+									if(data[a].role_id==onerow.roleid){
+										var i=$("#roleInfoGrid").datagrid("getRowIndex",onerow);
+										 $("#roleInfoGrid").datagrid("checkRow",i);
+									}
+								}
+							});
+						}
+					});
+			}
+		});
+	};
+	//用户管理页面的角色管理表格
+	$.fn.adminManage_roleInfoGrid=function(){
+		this.datagrid({
+			height:400,
+			width:420,
+			method:"post",
+		    columns:[[    
+		        {field:'ck',checkbox:true},    
+		        {field:'roleid',title:'编号',halign:'center',sortable:true,resizable:true,width:50},    
+		        {field:'rolename',title:'角色名称',halign:'center',sortable:true,resizable:true,width:150},   
+		        {field:'roledesc',title:'角色描述',halign:'center',sortable:true,resizable:true,width:150}   
+		    ]],    
+			url:"listRoles",
+			checkOnSelect:true,
+			selectOnCheck:true,
+			rownumbers:true,
+			striped:true,
+			fitColumns:true
+		});
+	};
+	//角色管理页面的角色表格
+	$.fn.roleManage_roleGrid=function(){
+		this.datagrid({
+			height:400,
+			width:420,
+			method:"post",
+		    columns:[[    
+		        {field:'ck',checkbox:true},    
+		        {field:'roleid',title:'编号',halign:'center',sortable:true,resizable:true,width:50},    
+		        {field:'rolename',title:'角色名称',halign:'center',sortable:true,resizable:true,width:150},    
+		        {field:'roledesc',title:'角色描述',halign:'center',sortable:true,resizable:true,width:150}  
+		    ]],    
+			url:"listRoles",
+			checkOnSelect:true,
+			selectOnCheck:true,
+			rownumbers:true,
+			striped:true,
+			singleSelect:true,
+			onSelect:function(rowIndex, rowData){
+				$("#roleName").text(rowData.rolename);
+				var roots=$("#rightTree").tree("getRoots");
+				//find后得到的就是object，object有个target，代表html片段
+				//console.log(roots);
+				//清除所选状态
+				$.each(roots,function(i,n){
+					var node=$("#rightTree").tree("find",this.id);
+					if(!$("#rightTree").tree("isLeaf",node.target)){//非叶子
+						recursionUnCheckTree(node.target);
+					}else{
+						$("#rightTree").tree("uncheck",node.target);
+					}
+				});
+				if(rowData.rolevalue=="-1"){//admin
+					$.each(roots,function(i,n){
+						var node=$("#rightTree").tree("find",this.id);
+						$("#rightTree").tree("check",node.target);
+					});
+				}else{//普通角色
+					$.ajax({
+						type:"post",
+						url:"getRightsByRoleId?roleId="+rowData.roleid,
+						success:function(data,status){
+							for(var i=0;i<data.length;i++){
+								var node=$("#rightTree").tree("find",data[i].right_id);
+								if($("#rightTree").tree("isLeaf",node.target))
+								   $("#rightTree").tree("check",node.target);
+							}
+						}
+					});
+				}
+			}
+		});
+	};
+})(jQuery);

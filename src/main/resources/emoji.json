@@ -1,0 +1,98 @@
+[
+	{
+		key:"[/擦汗]",
+		value:"<span class='lc_face lc_face01'></span>"
+	},
+	{
+		key:"[/钞票]",
+		value:"<span class='lc_face lc_face02'></span>"
+	},
+	{
+		key:"[/发怒]",
+		value:"<span class='lc_face lc_face03'></span>"
+	},
+	{
+		key:"[/浮云]",
+		value:"<span class='lc_face lc_face04'></span>"
+	},
+	{
+		key:"[/给力]",
+		value:"<span class='lc_face lc_face05'></span>"
+	},
+	{
+		key:"[/大哭]",
+		value:"<span class='lc_face lc_face06'></span>"
+	},
+	{
+		key:"[/憨笑]",
+		value:"<span class='lc_face lc_face07'></span>"
+	},
+	{
+		key:"[/色鬼]",
+		value:"<span class='lc_face lc_face08'></span>"
+	},
+	{
+		key:"[/奋斗]",
+		value:"<span class='lc_face lc_face09'></span>"
+	},
+	{
+		key:"[/鼓掌]",
+		value:"<span class='lc_face lc_face10'></span>"
+	},
+	{
+		key:"[/鄙视]",
+		value:"<span class='lc_face lc_face11'></span>"
+	},
+	{
+		key:"[/可爱]",
+		value:"<span class='lc_face lc_face12'></span>"
+	},
+	{
+		key:"[/闭嘴]",
+		value:"<span class='lc_face lc_face13'></span>"
+	},
+	{
+		key:"[/疑问]",
+		value:"<span class='lc_face lc_face14'></span>"
+	},
+	{
+		key:"[/抓狂]",
+		value:"<span class='lc_face lc_face15'></span>"
+	},
+	{
+		key:"[/惊讶]",
+		value:"<span class='lc_face lc_face16'></span>"
+	},
+	{
+		key:"[/可怜]",
+		value:"<span class='lc_face lc_face17'></span>"
+	},
+	{
+		key:"[/弱小]",
+		value:"<span class='lc_face lc_face18'></span>"
+	},
+	{
+		key:"[/强大]",
+		value:"<span class='lc_face lc_face19'></span>"
+	},
+	{
+		key:"[/握手]",
+		value:"<span class='lc_face lc_face20'></span>"
+	},
+	{
+		key:"[/肌肉]",
+		value:"<span class='lc_face lc_face21'></span>"
+	},
+	{
+		key:"[/喝酒]",
+		value:"<span class='lc_face lc_face22'></span>"
+	},
+	{
+		key:"[/玫瑰]",
+		value:"<span class='lc_face lc_face23'></span>"
+	},
+	{
+		key:"[/打酱油]",
+		value:"<span class='lc_face lc_face24'></span>"
+	},
+]

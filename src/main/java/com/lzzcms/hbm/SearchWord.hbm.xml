@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.lzzcms.model">
+    <class name="SearchWord" table="lzz_searchword">
+       <composite-id>
+            <key-property name="searchDate" column="searchdate" type="java.util.Date" ></key-property>
+            <key-property name="searchText" column="searchtext" type="java.lang.String" ></key-property>
+        </composite-id>
+            <property name="searchCount" column="searchcount" type="int" ></property>
+    </class>
+</hibernate-mapping>

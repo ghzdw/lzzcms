@@ -1,0 +1,2069 @@
+ <%@ page isELIgnored="true" %>   
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	 <link rel="shortcut icon" href="<zdw:tpl_path/>/imgs/favicon.ico" type="image/x-icon">
+   <title>标签管理</title>
+    <meta name="keywords" content="<zdw:field name='clnkeywords'/>" />
+    <meta name="description" content="<zdw:field name='clndesc'/>" />
+    <link href="<zdw:tpl_path/>/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<zdw:tpl_path/>/poshytip/tip-yellow/tip-yellow.css">
+    <link href="<zdw:tpl_path/>/style/common.css" rel="stylesheet">
+    <link href="<zdw:tpl_path/>/style/tagmanage.css" rel="stylesheet">
+ 	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<zdw:tpl_path/>/poshytip/jquery.poshytip.min.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="<zdw:tpl_path/>/SyntaxHighlighter/shCoreDefault.css">
+	<script type="text/javascript" src="<zdw:tpl_path/>/SyntaxHighlighter/shCore.js"></script>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+  </head>
+  <body>
+  <section class="container-fluid" id="container-fluid">
+  	 <section class="row topsec">
+	   <zdw:include file="head.html"/>
+	  	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	  	   <ol class="breadcrumb">		
+				<zdw:pathlist>
+				  <li><a href='<zdw:path name="link"/>'><zdw:path name="name"/></a></li>
+				</zdw:pathlist>
+				<li class="download">
+					<a href="<zdw:global_field name='lzzcms_downloadurl'/>">下载最新版乐之者内容管理系统(乐之者cms)</a>
+				</li> 				 
+		   </ol> 
+	  	</div>
+	 </section>
+		<div class="row">
+			<section class="col-md-2 leftslider"><!--左侧导航-->
+				<div class="btn-group-vertical">
+					<button type="button" class="btn btn-default active" name="forcommtr">
+						<div>通用标签<span class="glyphicon glyphicon-question-sign"></span></div>
+						<div><small>指在所有模板里都可使用的标签</small></div>
+					</button>
+					<button type="button" class="btn btn-default" name="forindextr">
+						<div>首页模板标签<span class="glyphicon glyphicon-question-sign"></span></div>
+						<div><small>默认:index.html</small></div>
+					</button>
+					<button type="button" class="btn btn-default" name="forcovertr">
+						<div>封面模板标签<span class="glyphicon glyphicon-question-sign"></span></div>
+						<div><small>默认：cover_频道英文标识.html</small></div>
+					</button>
+					<button type="button" class="btn btn-default" name="forlisttr">
+						<div>列表模板标签<span class="glyphicon glyphicon-question-sign"></span></div>
+						<div><small>默认:list_频道英文标识.html</small></div>
+					</button>
+					<button type="button" class="btn btn-default"  name="forcontenttr">
+						<div>内容模板标签<span class="glyphicon glyphicon-question-sign"></span></div>
+						<div><small>默认:content_频道英文标识.html</small></div>
+					</button>
+					<button type="button" class="btn btn-default" name="forsinglepagetr">
+						<div>单页面栏目模板标签<span class="glyphicon glyphicon-question-sign"></span></div>
+						<div><small>默认：single_page.html</small></div>
+					</button>
+					<button type="button" class="btn btn-default" name="forsearchtr">
+						<div>搜索模板标签<span class="glyphicon glyphicon-question-sign"></span></div>
+						<div><small>默认：search.html</small></div>
+					</button>
+				</div>
+			</section><!--/左侧导航-->
+			<section class="col-md-10 cont"><!--右侧-->
+				<!--一个panel代表左侧的一大类-->
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<!--一个表格，显示左侧一个导航对应可用的标签-->
+						<table class="table table-bordered  table-condensed usabletagtable">
+							<tr id="forcommtr">
+								<td >可用标签<span class="glyphicon glyphicon-question-sign usabletagtip"></span></td>
+								<td>
+									<span class="label label-warning labelleft"><a href="#tagfieldintro">field</a></span>
+									<span class="label label-warning labelleft"><a href="#tagtpl_pathintro">tpl_path</a></span>
+									<span class="label label-warning labelleft"><a href="#tagincludeintro">include</a></span>
+									<span class="label label-warning labelleft"><a href="#tagindex_pathintro">index_path</a></span>
+									<span class="label label-warning labelleft"><a href="#tagnavintro">nav</a></span>
+									<span class="label label-warning labelleft"><a href="#tagpathlistintro">pathlist</a></span>
+									<span class="label label-warning labelleft"><a href="#tagpathintro">path</a></span>
+									<span class="label label-warning labelleft"><a href="#tagdoclistintro">doclist</a></span>
+									<span class="label label-warning labelleft"><a href="#tagclnlistintro">clnlist</a></span>
+									<span class="label label-warning labelleft"><a href="#tagflinksintro">flinks</a></span>
+									<span class="label label-warning labelleft"><a href="#tagflinkintro">flink</a></span>
+									<span class="label label-warning labelleft"><a href="#tagglobal_fieldintro">global_field</a></span>
+									<span class="label label-warning labelleft"><a href="#tagchooseintro">choose</a></span>
+									<span class="label label-warning labelleft"><a href="#tagwhenintro">when</a></span>
+									<span class="label label-warning labelleft"><a href="#tagotherwiseintro">otherwise</a></span>
+								</td>
+							</tr>
+							<tr id="forindextr">
+								<td >可用标签<span class="glyphicon glyphicon-question-sign usabletagtip"></span></td>
+								<td></td>
+							</tr>
+							<tr id="forcovertr">
+								<td >可用标签<span class="glyphicon glyphicon-question-sign usabletagtip"></span></td>
+								<td>
+									<span class="label label-danger labelleft"><a href="#tagsonlistintro">sonlist</a></span>
+								</td>
+							</tr>
+							<tr id="forlisttr">
+								<td >可用标签<span class="glyphicon glyphicon-question-sign usabletagtip"></span></td>
+								<td>
+									<span class="label label-danger labelleft"><a href="#tagpagerintro">pager</a></span>
+								</td>
+							</tr>
+							<tr id="forcontenttr">
+								<td >可用标签<span class="glyphicon glyphicon-question-sign usabletagtip"></span></td>
+								<td>
+									<span class="label label-danger labelleft"><a href="#tagpreintro">pre</a></span>
+									<span class="label label-danger labelleft"><a href="#tagnextintro">next</a></span>
+									<span class="label label-danger labelleft"><a href="#tagcommentintro">comment</a></span>
+									<span class="label label-danger labelleft"><a href="#tagrelationsintro">relations</a></span>
+									<span class="label label-danger labelleft"><a href="#tagrelationintro">relation</a></span>
+								</td>
+							</tr>
+							<tr id="forsinglepagetr">
+								<td >可用标签<span class="glyphicon glyphicon-question-sign usabletagtip"></span></td>
+								<td>
+									<span class="label label-danger labelleft"><a href="#tagcontentintro">content</a></span>
+								</td>
+							</tr>
+							<tr id="forsearchtr">
+								<td >可用标签<span class="glyphicon glyphicon-question-sign usabletagtip"></span></td>
+								<td>
+									<span class="label label-danger labelleft"><a href="#tagresultsintro">results</a></span>
+									<span class="label label-danger labelleft"><a href="#tagsearchitemintro">searchitem</a></span>
+								</td>
+							</tr>
+						</table>
+						<!--/一个表格，显示左侧一个导航对应可用的标签-->
+				<div>	
+						<section class="sep">通用标签</section>
+						<!--一个标签tag:field-->
+						<table class="table table-bordered  table-condensed onetagtable" id="tagfieldintro">
+							<caption>field标签介绍</caption>
+							<!--一个标签的一个格式开始-->
+							<tr class="success" >
+								<td colspan="2">field格式1</td>
+							</tr>
+							<tr>
+								<td >格式:</td>
+								<td class="formattd">
+									<pre class="brush:html;toolbar:false">&lt;zdw:field 属性名称=&quot;属性值&quot;/&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>name<i class="necessary leftspace">*</i></td>
+											<td class="usableattrval">
+												<span>indexname(首页名字)、</span><span>indextitle(首页标题)、</span><span>indexkeys(首页关键字)、</span>
+												<span>indexdesc(首页描述)、</span><span>powerby(版权)、</span><span>record(备案号)</span>
+											</td>
+										</tr>
+										<tr>
+											<td>len</td>
+											<td class="usableattrval">
+												正整数，表示截取后长度
+											</td>
+										</tr>
+										<tr>
+											<td>append</td>
+											<td class="usableattrval">
+												自定义字符串，表示最后附加的内容，当使用len发生截取行为后生效
+											</td>
+										</tr>
+										<tr>
+											<td>sensitive</td>
+											<td class="usableattrval">
+												截取字符串的时候是否区分中英文，如果区分中文，则一个汉字视为2个长度，一个英文视为1个长度，比如"乐之者cms"，如果len="7",
+												则结果为"乐之者c";如果不区分，则中英文都视为1个长度。yes:区分   no:不分区，不设置该属性默认不区分中英文.
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>获取网站首页的名字、首页标题、首页关键字、首页描述、版权、备案号</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								    <pre class="brush:html;toolbar:false">比如：&lt;zdw:field name=&quot;indexname&quot;/&gt;作用是取出后端配置的&quot;主页名称&quot;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+							<tr class="spaceformat"></tr>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">field格式2</td>
+							</tr>
+							<tr>
+								<td >格式:</td>
+								<td class="formattd">
+										<pre class="brush:html;toolbar:false">&lt;zdw:nav type=&quot;top&quot;&gt;
+   &lt;zdw:field 属性名称=&quot;属性值&quot;/&gt;
+&lt;/zdw:nav&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>name<i class="necessary leftspace">*</i></td>
+											<td class="usableattrval"><span>url(栏目地址)、</span>
+											   <span>personalstyle(栏目自定义样式)、</span>
+											    <span>name(栏目名称)</span>
+											</td>
+										</tr>
+										<tr>
+											<td>len,append,sensitive</td>
+											<td class="usableattrval">
+												参见"field格式1"
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>包含在nav标签中，获取栏目地址、栏目名称、栏目样式</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+									<pre class="brush:html;toolbar:false">&lt;zdw:nav type=&quot;top&quot;&gt;
+    &lt;a href=&quot; &lt;zdw:field name=&#39;url&#39;/&gt; &quot;&gt;&lt;zdw:field name=&#39;personalstyle&#39;/&gt;&lt;zdw:field name=&quot;name&quot;/&gt;&lt;/a&gt;
+&lt;/zdw:nav&gt;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+							<tr class="spaceformat"></tr>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">field格式3</td>
+							</tr>
+							<tr>
+								<td >格式:</td>
+								<td class="formattd">
+								<pre class="brush:html;toolbar:false">&lt;zdw:doclist count=&quot;1&quot; flag=&quot;h&quot;&gt;
+   &lt;zdw:field 属性名称=&quot;属性值&quot;/&gt;
+&lt;/zdw:doclist&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>name<i class="necessary leftspace">*</i></td>
+											<td class="usableattrval"><span>comm_title(内容标题)、</span>
+											  <span>comm_shorttitle(内容简短标题)、</span>
+												<span>comm_click(内容点击量)、</span><span>comm_publishdate(内容发布日期)、</span>
+												<span>comm_keywords(内容关键字)、</span><span>comm_desc(内容描述)、</span>
+												<span>comm_thumbpic(内容缩略图地址)、</span><span>comm_intro(内容简介)、</span>
+												<span>docurl(内容访问地址)、</span><span>name(内容所属栏目名称)、</span>
+												<span>channelname(内容所属频道名称)、</span><span>come_from(内容来源)、</span>
+												<span>author_name(内容作者)、</span><span>define_flag(自定义标记)、</span>
+												<span>comm_modifydate(内容最后日期)、</span><span>index(当前文章下标)</span>
+											</td>
+										</tr>
+										<tr>
+											<td>len,append,sensitive</td>
+											<td class="usableattrval">
+												参见"field格式1"
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>包含在doclist标签中，获取文档的标题,简短标题、点击量、发布日期等信息</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								    <pre class="brush:html;toolbar:false">&lt;zdw:doclist count=&quot;1&quot; flag=&quot;h&quot;&gt;
+  &lt;a href=&quot;&lt;zdw:field name=&#39;docurl&#39;/&gt;&quot;&gt;&lt;zdw:field name=&quot;comm_title&quot;/&gt;&lt;/a&gt;
+  &lt;zdw:field name=&quot;comm_intro&quot;/&gt;
+&lt;/zdw:doclist&gt;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+							<tr class="spaceformat"></tr>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">field格式4</td>
+							</tr>
+							<tr>
+								<td >格式:</td>
+								<td class="formattd">
+								    <pre class="brush:html;toolbar:false">&lt;zdw:clnlist type=&quot;list&quot;&gt;
+   &lt;zdw:field 属性名=&quot;属性值&quot;/&gt;
+&lt;/zdw:clnlist&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>name<i class="necessary leftspace">*</i></td>
+											<td class="usableattrval">
+													<span>url(栏目地址)、</span><span>name(栏目名称)、</span>
+													<span>docnum(栏目下的文档个数)、</span><span>index(当前栏目下标)</span>
+											</td>
+										</tr>
+										<tr>
+											<td>len,append,sensitive</td>
+											<td class="usableattrval">
+												参见"field格式1"
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>包含在clnlist标签中，获取栏目的名称，栏目的访问地址，栏目下的文档个数</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								    <pre class="brush:html;toolbar:false">&lt;zdw:clnlist type=&quot;list&quot;&gt;
+   &lt;zdw:field name=&quot;name&quot;/&gt;&lt;a href=&quot;&lt;zdw:field name=&#39;url&#39;/&gt;&quot;&gt;更多...&lt;/a&gt;
+   &lt;zdw:doclist count=&quot;9&quot;&gt;
+	&lt;zdw:field name=&quot;comm_publishdate&quot;/&gt;
+	&lt;a href=&quot;&lt;zdw:field name=&#39;docurl&#39;/&gt;&quot;&gt;&lt;zdw:field name=&quot;comm_title&quot;/&gt;&lt;/a&gt;
+   &lt;/zdw:doclist&gt;
+&lt;/zdw:clnlist&gt;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+							<tr class="spaceformat"></tr>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">field格式5</td>
+							</tr>
+							<tr>
+								<td >格式:</td>
+								<td class="formattd">
+								<pre class="brush:html;toolbar:false">&lt;zdw:pre&gt;
+   &lt;zdw:field 属性名=&quot;属性值&quot;/&gt;
+&lt;/zdw:pre&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>name<i class="necessary leftspace">*</i></td>
+											<td class="usableattrval">
+												<span>comm_title(内容标题)、</span><span>docurl(内容访问地址)</span>
+											</td>
+										</tr>
+										<tr>
+											<td>len,append,sensitive</td>
+											<td class="usableattrval">
+												参见"field格式1"
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>包含在pre标签中，获取上一篇文档的信息</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								    <pre class="brush:html;toolbar:false">&lt;zdw:pre&gt;
+   &lt;a href=&#39;&lt;zdw:field name=&quot;docurl&quot;/&gt;&#39;&gt;&lt;zdw:field name=&quot;comm_title&quot;/&gt;&lt;/a&gt;
+&lt;/zdw:pre&gt;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+							<tr class="spaceformat"></tr>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">field格式6</td>
+							</tr>
+							<tr>
+								<td >格式:</td>
+								<td class="formattd">
+								    <pre class="brush:html;toolbar:false">&lt;zdw:next&gt;
+  &lt;zdw:field 属性名=&quot;属性值&quot;/&gt;
+&lt;/zdw:next&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>name<i class="necessary leftspace">*</i></td>
+											<td class="usableattrval">
+												<span>comm_title(内容标题)、</span><span>docurl(内容访问地址)</span>
+											</td>
+										</tr>
+										<tr>
+											<td>len,append,sensitive</td>
+											<td class="usableattrval">
+												参见"field格式1"
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>包含在next标签中，获取下一篇文档的信息</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								    <pre class="brush:html;toolbar:false">&lt;zdw:next&gt;
+   &lt;a href=&#39;&lt;zdw:field name=&quot;docurl&quot;/&gt;&#39;&gt;&lt;zdw:field name=&quot;comm_title&quot;/&gt;&lt;/a&gt;
+&lt;/zdw:next&gt;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+							<tr class="spaceformat"></tr>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">field格式7</td>
+							</tr>
+							<tr>
+								<td >格式:</td>
+								<td class="formattd">
+								    <pre class="brush:html;toolbar:false">&lt;zdw:sonlist&gt;
+  &lt;zdw:field 属性名=&quot;属性值&quot;/&gt;
+&lt;/zdw:sonlist&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>name<i class="necessary leftspace">*</i></td>
+											<td class="usableattrval">
+											   <span>url(子栏目访问地址)、</span><span>name(子栏目的名称)、</span>
+											   <span>index(当前栏目下标)</span>
+											</td>
+										</tr>
+										<tr>
+											<td>len,append,sensitive</td>
+											<td class="usableattrval">
+												参见"field格式1"
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>包含在sonlist标签中，获取子栏目列表里子栏目的名称，子栏目的访问地址</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								   <pre class="brush:html;toolbar:false">&lt;zdw:sonlist&gt;
+  &lt;zdw:field name=&quot;name&quot;/&gt;&lt;a href=&quot;&lt;zdw:field name=&#39;url&#39;/&gt;&quot;&gt;更多...&lt;/a&gt;
+  &lt;zdw:doclist count=&quot;5&quot;&gt;
+	&lt;zdw:field name=&quot;comm_publishdate&quot;/&gt;
+	&lt;a href=&quot;&lt;zdw:field name=&#39;docurl&#39;/&gt;&quot;&gt;&lt;zdw:field name=&quot;comm_title&quot;/&gt;&lt;/a&gt;
+  &lt;/zdw:doclist&gt;
+&lt;/zdw:sonlist&gt;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+							<tr class="spaceformat"></tr>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">field格式8</td>
+							</tr>
+							<tr>
+								<td >格式:</td>
+								<td class="formattd">
+								  <pre class="brush:html;toolbar:false">&lt;zdw:field 属性名=&quot;属性值&quot;/&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>name<i class="necessary leftspace">*</i></td>
+											<td class="usableattrval">
+												<span>comm_shorttitle(内容简短标题)、</span>
+												<span>comm_click(内容点击量)、</span><span>comm_publishdate(内容发布日期)、</span>
+												<span>comm_keywords(内容关键字)、</span><span>comm_desc(内容描述)、</span>
+												<span>comm_thumbpic(内容缩略图地址)、</span><span>comm_intro(内容简介)、</span>
+												<span>docurl(内容访问地址)、</span><span>name(内容所属栏目名称)、</span>
+												<span>channelname(内容所属频道名称)、</span><span>come_from(内容来源)、</span>
+												<span>author_name(内容作者)、</span><span>define_flag(自定义标记)</span>
+												<span>内容页面所属频道对应附加表的所有字段</span>
+											</td>
+										</tr>
+										<tr>
+											<td>len,append,sensitive</td>
+											<td class="usableattrval">
+												参见"field格式1"
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>单独在内容页使用,获取内容的详细信息(包含附加表的信息)</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								  <pre class="brush:html;toolbar:false">&lt;zdw:field name=&quot;comm_title&quot;/&gt;
+&lt;zdw:field name=&quot;mainbody&quot;/&gt;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+						</table>
+						<!--/一个标签tag:field-->
+						<!--一个标签tag:tpl_path-->
+						<table class="table table-bordered  table-condensed onetagtable" id="tagtpl_pathintro">
+							<caption>tpl_path标签介绍</caption>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">tpl_path格式</td>
+							</tr>
+							<tr>
+								<td >格式:</td>
+								<td class="formattd">
+								<pre class="brush:html;toolbar:false">&lt;zdw:tpl_path/&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>无</td>
+											<td class="usableattrval">
+												无
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>获取模板目录在网站的访问路径</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								   <pre class="brush:html;toolbar:false">假如模板目录名称为tpls，那么&lt;zdw:tpl_path/&gt;返回值类似http://localhost:8080/lzzcms/tpls</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+						</table>
+						<!--/一个标签tag:tpl_path-->
+
+						<!--一个标签tag:include-->
+						<table class="table table-bordered  table-condensed onetagtable" id="tagincludeintro">
+							<caption>include标签介绍</caption>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">include格式</td>
+							</tr>
+							<tr>
+								<td >格式:</td>
+								<td class="formattd">
+								  <pre class="brush:html;toolbar:false">&lt;zdw:include 属性名=&quot;模板名称&quot;/&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>file<i class="necessary leftspace">*</i></td>
+											<td class="usableattrval">
+											   <span>模板文件名称</span>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>在模板文件中包含另一个同级目录下的html文件</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								   <pre class="brush:html;toolbar:false">&lt;zdw:include file=&quot;head.html&quot;/&gt;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+						</table>
+						<!--/一个标签tag:include-->
+
+						<!--一个标签tag:index_path-->
+						<table class="table table-bordered  table-condensed onetagtable" id="tagindex_pathintro">
+							<caption>index_path标签介绍</caption>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">index_path格式</td>
+							</tr>
+							<tr>
+								<td >格式:</td>
+								<td class="formattd">
+								   <pre class="brush:html;toolbar:false">&lt;zdw:index_path/&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>无</td>
+											<td class="usableattrval">
+												无
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>得到网站主页地址</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								   <pre class="brush:html;toolbar:false">&lt;zdw:index_path/&gt;返回值类似http://localhost:8080/lzzcms</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+						</table>
+						<!--/一个标签tag:index_path-->
+
+
+						<!--一个标签tag:nav-->
+						<table class="table table-bordered  table-condensed onetagtable" id="tagnavintro">
+							<caption>nav标签介绍</caption>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">nva格式</td>
+							</tr>
+							<tr>
+								<td >格式:</td>
+								<td class="formattd">
+								   <pre class="brush:html;toolbar:false">&lt;zdw:nav 属性名=&quot;属性值&quot;&gt;
+   &lt;a href=&quot; &lt;zdw:field name=&#39;url&#39;/&gt; &quot;&gt;&lt;zdw:field name=&#39;personalstyle&#39;/&gt;&lt;zdw:field name=&quot;name&quot;/&gt;&lt;/a&gt;
+&lt;/zdw:nav&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>type</td>
+												<td class="usableattrval"><span>top(顶级栏目)</span>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>与field标签结合使用获取栏目信息，用来制作导航条</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								  <pre class="brush:html;toolbar:false">&lt;zdw:nav type=&quot;top&quot;&gt;
+   &lt;a href=&quot; &lt;zdw:field name=&#39;url&#39;/&gt; &quot;&gt;&lt;zdw:field name=&#39;personalstyle&#39;/&gt;&lt;zdw:field name=&quot;name&quot;/&gt;&lt;/a&gt;
+&lt;/zdw:nav&gt;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+						</table>
+						<!--/一个标签tag:nav-->
+
+
+					<!--一个标签tag:pathlist-->
+						<table class="table table-bordered  table-condensed onetagtable" id="tagpathlistintro">
+							<caption>pathlist标签介绍</caption>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">pathlist格式</td>
+							</tr>
+							<tr>
+								<td >格式:</td>
+								<td class="formattd">
+									<pre class="brush:html;toolbar:false">&lt;zdw:pathlist&gt;
+   &lt;a href=&#39;&lt;zdw:path name=&quot;link&quot;/&gt;&#39;&gt;&lt;zdw:path name=&quot;name&quot;/&gt;&lt;/a&gt;
+&lt;/zdw:pathlist&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>无</td>
+											<td class="usableattrval">无</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>与path标签结合获取层级路径</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								    <pre class="brush:html;toolbar:false">比如文章a在栏目c1下，c1又属于c2,则使用&lt;zdw:pathlist&gt;
+  &lt;a href=&#39;&lt;zdw:path name=&quot;link&quot;/&gt;&#39;&gt;&lt;zdw:path name=&quot;name&quot;/&gt;&lt;/a&gt;
+&lt;/zdw:pathlist&gt;
+返回值：c2/c1/a(&quot;/&quot;为自己添加的样式)</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+						</table>
+						<!--/一个标签tag:pathlist-->
+						
+					<!--一个标签tag:path-->
+						<table class="table table-bordered  table-condensed onetagtable" id="tagpathintro">
+							<caption>path标签介绍</caption>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">path格式</td>
+							</tr>
+							<tr>
+								<td >格式:</td>
+								<td class="formattd">
+								    <pre class="brush:html;toolbar:false">&lt;zdw:pathlist&gt;
+   &lt;zdw:path 属性名=&quot;属性值&quot;/&gt;
+&lt;/zdw:pathlist&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>name <i class="necessary">*</i></td>
+											<td class="usableattrval">
+												<span>link(路径访问地址)、</span><span>name(路径名称)</span>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>与pathlist标签结合获取层级路径</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								    <pre class="brush:html;toolbar:false">比如文章a在栏目c1下，c1又属于c2,则使用&lt;zdw:pathlist&gt;
+  &lt;a href=&#39;&lt;zdw:path name=&quot;link&quot;/&gt;&#39;&gt;&lt;zdw:path name=&quot;name&quot;/&gt;&lt;/a&gt;
+&lt;/zdw:pathlist&gt;
+返回值：c2/c1/a(&quot;/&quot;为自己添加的样式)</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+						</table>
+						<!--/一个标签tag:path-->
+						
+					<!--一个标签tag:doclist-->
+						<table class="table table-bordered  table-condensed onetagtable" id="tagdoclistintro">
+							<caption>doclist标签介绍</caption>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">doclist格式1</td>
+							</tr>
+							<tr>
+								<td>格式:</td>
+								<td class="formattd">
+								   <pre class="brush:html;toolbar:false">&lt;zdw:doclist 属性名=&quot;属性值&quot;&gt;
+   &lt;zdw:field name=&quot;comm_title&quot;/&gt;
+&lt;/zdw:doclist&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>count</td>
+											<td class="usableattrval">
+												<span>表示要取出的内容的条数，正整数,默认10条</span>
+											</td>
+										</tr>
+										<tr>
+											<td>flag</td>
+											<td class="usableattrval">
+												<span>内容的自定义标记,可用值为h(头条)、</span>
+												<span>c(推荐)、</span><span>f(幻灯片)</span>
+											</td>
+										</tr>
+										<tr>
+											<td>sortby</td>
+											<td class="usableattrval">
+												<span>以内容的什么属性排序:click(点击量)、</span>
+												<span>publishdate(发布日期)</span>
+											</td>
+										</tr>
+										<tr>
+											<td>sort</td>
+											<td class="usableattrval">
+												<span>正序或者倒序,当sortby有值时，才起作用,默认asc:asc(从小到大)、</span>
+												<span>desc(从大到小)</span>
+											</td>
+										</tr>
+										<tr>
+											<td>columns</td>
+											<td class="usableattrval">
+												<span>该属性只有doclist标签不被包含时才起作用。不指定该属性，默认获取的内容列表是当前正在生成的栏目;可指定栏目id表示从指定的栏目中获取内容列表。正整数(栏目id，可从后台栏目管理查看,多个使用"|"分割)、</span>
+												<span>all(不区分栏目，比如取点击量最高、头条、最新等时，如不需要区分栏目，则可如此指定)</span>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>与field标签结合获取当前正在生成的栏目的文档列表</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								   <pre class="brush:html;toolbar:false">&lt;zdw:doclist count=&quot;1&quot; flag=&quot;h&quot;&gt;
+ 	&lt;zdw:field name=&quot;comm_title&quot;/&gt;
+	&lt;zdw:field name=&quot;comm_intro&quot;/&gt;
+&lt;/zdw:doclist&gt;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+							<tr class="spaceformat"></tr>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">doclist格式2</td>
+							</tr>
+							<tr>
+								<td>格式:</td>
+								<td class="formattd">
+								    <pre class="brush:html;toolbar:false">&lt;zdw:sonlist&gt;
+	&lt;zdw:field name=&quot;name&quot;/&gt;
+	&lt;zdw:doclist 属性名=&quot;属性值&quot;&gt;
+		&lt;zdw:field name=&quot;comm_title&quot;/&gt;
+	&lt;/zdw:doclist&gt;
+&lt;/zdw:sonlist&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>count</td>
+											<td class="usableattrval">
+												<span>表示要取出的内容的条数，正整数,默认10条</span>
+											</td>
+										</tr>
+										<tr>
+											<td>flag</td>
+											<td class="usableattrval">
+												<span>内容的自定义标记,可用值为h(头条)、</span>
+												<span>c(推荐)、</span><span>f(幻灯片)</span>
+											</td>
+										</tr>
+										<tr>
+											<td>sortby</td>
+											<td class="usableattrval">
+												<span>以内容的什么属性排序:click(点击量)、</span>
+												<span>publishdate(发布日期)</span>
+											</td>
+										</tr>
+										<tr>
+											<td>sort</td>
+											<td class="usableattrval">
+												<span>正序或者倒序,当sortby有值时，才起作用,默认asc:asc(从小到大)、</span>
+												<span>desc(从大到小)</span>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>结合sonlist取出子栏目后循环取出每个子栏目下的文档</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								    <pre class="brush:html;toolbar:false">&lt;zdw:sonlist&gt;
+	&lt;zdw:field name=&quot;name&quot;/&gt;
+	&lt;zdw:doclist 属性名=&quot;属性值&quot;&gt;
+		&lt;zdw:field name=&quot;comm_title&quot;/&gt;
+	&lt;/zdw:doclist&gt;
+&lt;/zdw:sonlist&gt;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+							<tr class="spaceformat"></tr>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">doclist格式3</td>
+							</tr>
+							<tr>
+								<td>格式:</td>
+								<td class="formattd">
+								<pre class="brush:html;toolbar:false">&lt;zdw:clnlist ids=&quot;13|14|15|16&quot;&gt;
+   	  &lt;a href=&quot;&lt;zdw:field name=&#39;url&#39;/&gt;&quot;&gt;&lt;zdw:field name=&quot;name&quot;/&gt;&lt;/a&gt;
+ 	 &lt;zdw:doclist 属性名=&quot;属性值&quot;&gt;
+		&lt;zdw:field name=&quot;comm_publishdate&quot;/&gt;
+		&lt;a href=&quot;&lt;zdw:field name=&#39;docurl&#39;/&gt;&quot;&gt;&lt;zdw:field name=&quot;comm_title&quot;/&gt;&lt;/a&gt;
+	 &lt;/zdw:doclist&gt;
+&lt;/zdw:clnlist&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>count</td>
+											<td class="usableattrval">
+												<span>表示要取出的内容的条数，正整数,默认10条</span>
+											</td>
+										</tr>
+										<tr>
+											<td>flag</td>
+											<td class="usableattrval">
+												<span>内容的自定义标记,可用值为h(头条)、</span>
+												<span>c(推荐)、</span><span>f(幻灯片)</span>
+											</td>
+										</tr>
+										<tr>
+											<td>sortby</td>
+											<td class="usableattrval">
+												<span>以内容的什么属性排序:click(点击量)、</span>
+												<span>publishdate(发布日期)</span>
+											</td>
+										</tr>
+										<tr>
+											<td>sort</td>
+											<td class="usableattrval">
+												<span>正序或者倒序,当sortby有值时，才起作用,默认asc:asc(从小到大)、</span>
+												<span>desc(从大到小)</span>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>结合clnlist取出指定栏目后循环取出该栏目的内容列表</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								  <pre class="brush:html;toolbar:false">&lt;zdw:clnlist ids=&quot;13|14|15|16&quot;&gt;
+   	  &lt;a href=&quot;&lt;zdw:field name=&#39;url&#39;/&gt;&quot;&gt;&lt;zdw:field name=&quot;name&quot;/&gt;&lt;/a&gt;
+   	&lt;zdw:doclist count=&quot;9&quot;&gt;
+		&lt;zdw:field name=&quot;comm_publishdate&quot;/&gt;
+		&lt;a href=&quot;&lt;zdw:field name=&#39;docurl&#39;/&gt;&quot;&gt;&lt;zdw:field name=&quot;comm_title&quot;/&gt;&lt;/a&gt;
+ 	&lt;/zdw:doclist&gt;
+&lt;/zdw:clnlist&gt;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+						</table>
+						<!--/一个标签tag:doclist-->
+						
+					<!--一个标签tag:clnlist-->
+						<table class="table table-bordered  table-condensed onetagtable" id="tagclnlistintro">
+							<caption>clnlist标签介绍</caption>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">clnlist格式</td>
+							</tr>
+							<tr>
+								<td>格式:</td>
+								<td class="formattd">
+								    <pre class="brush:html;toolbar:false">&lt;zdw:clnlist 属性名=&quot;属性值&quot;&gt;
+   	&lt;a href=&quot;&lt;zdw:field name=&#39;url&#39;/&gt;&quot;&gt;&lt;zdw:field name=&quot;name&quot;/&gt;&lt;/a&gt;
+&lt;/zdw:clnlist&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>ids</td>
+											<td class="usableattrval">
+												<span>要获取的栏目id，多个使用"|"分割，栏目id请到后台栏目管理处查看栏目编号</span>
+											</td>
+										</tr>
+										<tr>
+											<td>type</td>
+											<td class="usableattrval">
+												栏目类型：<span>singlepage(单页面)、</span>
+												<span>cover(封面)、</span><span>list(列表)、</span>
+												<span>outlink(外部链接)</span>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>与field标签结合获取栏目信息，参见field标签</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								   <pre class="brush:html;toolbar:false">&lt;zdw:clnlist ids=&quot;13&quot;&gt;
+   	&lt;li&gt;&lt;a href=&quot;&lt;zdw:field name=&#39;url&#39;/&gt;&quot;&gt;&lt;zdw:field name=&quot;name&quot;/&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/zdw:clnlist&gt;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+							<tr class="spaceformat"></tr>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">clnlist格式2</td>
+							</tr>
+							<tr>
+								<td>格式:</td>
+								<td class="formattd">
+								       <pre class="brush:html;toolbar:false">&lt;zdw:clnlist 属性名=&quot;属性值&quot;&gt;
+ 	&lt;li&gt;&lt;a href=&quot;&lt;zdw:field name=&#39;url&#39;/&gt;&quot;&gt;&lt;zdw:field name=&quot;name&quot;/&gt;&lt;/a&gt;&lt;/li&gt;
+ 	&lt;zdw:doclist count=&quot;9&quot;&gt;
+		&lt;zdw:field name=&quot;comm_publishdate&quot;/&gt;
+		&lt;a href=&quot;&lt;zdw:field name=&#39;docurl&#39;/&gt;&quot;&gt;hhhh:&lt;zdw:field name=&quot;comm_title&quot;/&gt;&lt;/a&gt;
+	&lt;/zdw:doclist&gt;
+&lt;/zdw:clnlist&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>ids</td>
+											<td class="usableattrval">
+												<span>要获取的栏目id，多个使用"|"分割，栏目id请到后台栏目管理处查看栏目编号</span>
+											</td>
+										</tr>
+										<tr>
+											<td>type</td>
+											<td class="usableattrval">
+												栏目类型：<span>singlepage(单页面)、</span>
+												<span>cover(封面)、</span><span>list(列表)、</span>
+												<span>outlink(外部链接)</span>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>结合field获取栏目信息，结合doclist获取该栏目下的内容信息，参见field、doclist</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								     <pre class="brush:html;toolbar:false">&lt;zdw:clnlist ids=&quot;13&quot;&gt;
+ 	&lt;li&gt;&lt;a href=&quot;&lt;zdw:field name=&#39;url&#39;/&gt;&quot;&gt;&lt;zdw:field name=&quot;name&quot;/&gt;&lt;/a&gt;&lt;/li&gt;
+ 	&lt;zdw:doclist count=&quot;9&quot;&gt;
+		&lt;zdw:field name=&quot;comm_publishdate&quot;/&gt;
+		&lt;a href=&quot;&lt;zdw:field name=&#39;docurl&#39;/&gt;&quot;&gt;hhhh:&lt;zdw:field name=&quot;comm_title&quot;/&gt;&lt;/a&gt;
+	&lt;/zdw:doclist&gt;
+&lt;/zdw:clnlist&gt;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+						</table>
+						<!--/一个标签tag:clnlist-->
+						
+						<!--一个标签tag:flinks-->
+						<table class="table table-bordered  table-condensed onetagtable" id="tagflinksintro">
+							<caption>flinks标签介绍</caption>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">flinks格式</td>
+							</tr>
+							<tr>
+								<td>格式:</td>
+								<td class="formattd">
+								    <pre class="brush:html;toolbar:false">&lt;zdw:flinks 属性名=&quot;属性值&quot;&gt;
+   &lt;a href=&#39;&lt;zdw:flink name=&quot;url&quot;/&gt;&#39;&gt;&lt;zdw:flink name=&quot;linkdesc&quot;/&gt;&lt;/a&gt;	
+&lt;/zdw:flinks&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>type</td>
+											<td class="usableattrval">
+												<span>text(文本类型)、</span><span>img(图片类型)</span>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>与flink标签结合获取友情链接，参见flink标签</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								  <pre class="brush:html;toolbar:false">&lt;zdw:flinks type=&quot;text&quot;&gt;
+    &lt;a href=&#39;&lt;zdw:flink name=&quot;url&quot;/&gt;&#39;&gt;&lt;zdw:flink name=&quot;linkdesc&quot;/&gt;&lt;/a&gt;	
+&lt;/zdw:flinks&gt;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+						</table>
+						<!--/一个标签tag:flinks-->
+						
+							<!--一个标签tag:flink-->
+						<table class="table table-bordered  table-condensed onetagtable" id="tagflinkintro">
+							<caption>flink标签介绍</caption>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">flink格式</td>
+							</tr>
+							<tr>
+								<td>格式:</td>
+								<td class="formattd">
+								      <pre class="brush:html;toolbar:false">&lt;zdw:flinks type=&quot;text&quot;&gt;
+   &lt;zdw:flink 属性名=&quot;属性值&quot;/&gt;	
+&lt;/zdw:flinks&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>name<i class="necessary">*</i></td>
+											<td class="usableattrval">
+												<span>linkDesc(文字或者图片的访问地址)、</span><span>url(文字类型友情链接的访问地址)</span>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>与flinks标签结合获取友情链接，参见flinks标签</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								    <pre class="brush:html;toolbar:false">&lt;zdw:flinks type=&quot;text&quot;&gt;
+   &lt;a href=&#39;&lt;zdw:flink name=&quot;url&quot;/&gt;&#39;&gt;&lt;zdw:flink name=&quot;linkdesc&quot;/&gt;&lt;/a&gt;	
+&lt;/zdw:flinks&gt;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+						</table>
+						<!--/一个标签tag:flink-->
+						
+						
+							<!--一个标签tag:global_field-->
+						<table class="table table-bordered  table-condensed onetagtable" id="tagglobal_fieldintro">
+							<caption>global_field标签介绍</caption>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">global_field格式</td>
+							</tr>
+							<tr>
+								<td>格式:</td>
+								<td class="formattd">
+								      <pre class="brush:html;toolbar:false">&lt;zdw:global_field name=&quot;全局变量名&quot;/&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>name<i class="necessary">*</i></td>
+											<td class="usableattrval">
+												<span>在后台自己添加的全局变量名字</span>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>用于获取在后台添加的全局变量对应的值</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								     <pre class="brush:html;toolbar:false">比如：&lt;zdw:global_field name=&quot;download_url&quot;/&gt;作用是取出后端配置的全局变量&quot;download_url&quot;的值</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+						</table>
+						<!--/一个标签tag:global_field-->
+							<!--一个标签tag:choose-->
+						<table class="table table-bordered  table-condensed onetagtable" id="tagchooseintro">
+							<caption>choose标签介绍</caption>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">choose格式</td>
+							</tr>
+							<tr>
+								<td>格式:</td>
+								<td class="formattd">
+								       <span>参照choose的用法举例</span>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>无</td>
+											<td class="usableattrval">
+												无
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>choose、when、otherwise结合实现判断,choose为父标签，可以包含多个when，
+								但只能有一个otherwise,跟js里switch、case、default实现的功能是类似的。可以使用在relations、doclist、sonlist、clnlist
+								标签之中</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								     <pre class="brush:html;toolbar:false">&lt;zdw:relations&gt;
+    &lt;zdw:choose&gt;
+        &lt;zdw:when test=&quot;${index==2}&quot;&gt;
+            &lt;span class=&quot;red&quot;&gt;&lt;zdw:relation name=&quot;comm_title&quot; /&gt;&lt;/span&gt;
+        &lt;/zdw:when&gt;							
+    &lt;/zdw:choose&gt;
+&lt;/zdw:relations&gt;
+
+&lt;zdw:doclist&gt;
+    &lt;zdw:choose&gt;
+        &lt;zdw:when test=&quot;${index==1}&quot;&gt;
+            &lt;img src=&#39;&lt;zdw:field name=&quot;comm_thumbpic&quot; /&gt;&#39;/&gt;
+            &lt;span class=&quot;red&quot;&gt;&lt;zdw:field name=&quot;comm_title&quot; /&gt;&lt;/span&gt;
+        &lt;/zdw:when&gt;	
+        &lt;zdw:when test=&quot;${index==2}&quot;&gt;
+            &lt;span class=&quot;green&quot;&gt;&lt;zdw:field name=&quot;comm_title&quot; /&gt;&lt;/span&gt;
+        &lt;/zdw:when&gt;	
+        &lt;zdw:otherwise&gt;
+            &lt;span class=&quot;black&quot;&gt;&lt;zdw:field name=&quot;comm_title&quot; /&gt;&lt;/span&gt;
+        &lt;/zdw:otherwise&gt;							
+    &lt;/zdw:choose&gt;
+&lt;/zdw:doclist&gt;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+						</table>
+						<!--/一个标签tag:choose-->
+							<!--一个标签tag:when-->
+						<table class="table table-bordered  table-condensed onetagtable" id="tagwhenintro">
+							<caption>when标签介绍</caption>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">when格式</td>
+							</tr>
+							<tr>
+								<td>格式:</td>
+								<td class="formattd">
+								      参照choose的用法举例
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>test<i class="necessary">*</i></td>
+											<td class="usableattrval">
+												<span>判断条件，格式"${条件}"，如果你会el表达式，语法和el完全一样;不过不会也完全不影响。判断数字相等,比如：
+												${index==1},判断字符串是否相等：${comm_title eq 'abc'}</span>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>choose、when、otherwise结合实现判断</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								     参考choose的用法举例
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+						</table>
+						<!--/一个标签tag:when-->
+							<!--一个标签tag:otherwise-->
+						<table class="table table-bordered  table-condensed onetagtable" id="tagotherwiseintro">
+							<caption>otherwise标签介绍</caption>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">otherwise格式</td>
+							</tr>
+							<tr>
+								<td>格式:</td>
+								<td class="formattd">
+								        参考choose的用法举例
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>无</td>
+											<td class="usableattrval">
+												<span>无</span>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>choose、when、otherwise结合实现判断,本标签用于when不成立的时候要怎么处理</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								     参考choose的用法举例
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+						</table>
+						<!--/一个标签tag:otherwise-->
+				</div>	<!-- 通用标签结束 -->	
+				<div class="onetypetagcontainer forcovertr">
+					<section class="sep">封面模板独有标签</section>	
+					<!-- 封面模板独有标签开始 -->	
+						<!--一个标签tag:sonlist-->
+						<table class="table table-bordered  table-condensed onetagtable" id="tagsonlistintro">
+							<caption>sonlist标签介绍</caption>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">sonlist格式</td>
+							</tr>
+							<tr>
+								<td>格式:</td>
+								<td class="formattd">
+								    <pre class="brush:html;toolbar:false">&lt;zdw:sonlist&gt;
+   &lt;zdw:field name=&quot;name&quot;/&gt;&lt;a href=&quot;&lt;zdw:field name=&#39;url&#39;/&gt;&quot;&gt;更多...&lt;/a&gt;
+  	&lt;zdw:doclist count=&quot;5&quot;&gt;
+			&lt;zdw:field name=&quot;comm_publishdate&quot;/&gt;
+			&lt;a href=&quot;&lt;zdw:field name=&#39;docurl&#39;/&gt;&quot;&gt;
+			&lt;zdw:field name=&quot;comm_title&quot;/&gt;&lt;/a&gt;
+ 	&lt;/zdw:doclist&gt;
+&lt;/zdw:sonlist&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>无</td>
+											<td class="usableattrval">
+												无
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>结合doclist和field，用在封面模板里面，获取子栏目列表以及子栏目下面的文档信息</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								     <pre class="brush:html;toolbar:false">&lt;zdw:sonlist&gt;
+   &lt;zdw:field name=&quot;name&quot;/&gt;&lt;a href=&quot;&lt;zdw:field name=&#39;url&#39;/&gt;&quot;&gt;更多...&lt;/a&gt;
+  	&lt;zdw:doclist count=&quot;5&quot;&gt;
+			&lt;zdw:field name=&quot;comm_publishdate&quot;/&gt;
+			&lt;a href=&quot;&lt;zdw:field name=&#39;docurl&#39;/&gt;&quot;&gt;
+			&lt;zdw:field name=&quot;comm_title&quot;/&gt;&lt;/a&gt;
+ 	&lt;/zdw:doclist&gt;
+ &lt;/zdw:sonlist&gt;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+						</table>
+						<!--/一个标签tag:sonlist-->
+				</div>		<!-- /封面模板独有标签结束 -->
+				<div class="onetypetagcontainer forlisttr">
+					<section class="sep">列表模板独有标签</section>
+					<!-- 列表模板独有标签开始 -->	
+					   <!--一个标签tag:pager-->
+						<table class="table table-bordered  table-condensed onetagtable" id="tagpagerintro">
+							<caption>pager标签介绍</caption>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">pager格式</td>
+							</tr>
+							<tr>
+								<td>格式:</td>
+								<td class="formattd">
+								   <pre class="brush:html;toolbar:false">&lt;zdw:pager/&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>无</td>
+											<td class="usableattrval">
+												无
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>用在列表页面，取出分页信息。为了让分页组件符合你自己系统的展现样式，你需要重写以下css类。
+									.active(当前点击的页高亮css类),通过乐之者cms系统生成的分页组件的html结构，可以看到
+									还有其他css类，诸如pagernav(分页组件最外层的nav元素)、pagerul(分页组件ul结构的css类)、
+									pagerpre(上一页的css类)、pagernum(每一项数字的css类)、pagernext(下一页的css类)、
+									pagertotal(总共多少页的css类)你可以重写这些类来控制分页组件的样式，当然如果你对没有样式的分
+									页能够忍受，你也可以什么也不用做，即便你什么都不做，分页组件依然是可用的。  
+								</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								      <pre class="brush:html;toolbar:false">&lt;zdw:pager/&gt;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+						</table>
+						<!--/一个标签tag:pager-->
+				</div>	<!-- /列表模板独有标签结束 -->	
+				<div class="onetypetagcontainer forcontenttr">
+					<section class="sep">内容模板独有标签</section>
+					<!-- 内容页面独有标签开始 -->	
+					<!--一个标签tag:pre-->
+						<table class="table table-bordered  table-condensed onetagtable" id="tagpreintro">
+							<caption>pre标签介绍</caption>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">pre格式</td>
+							</tr>
+							<tr>
+								<td>格式:</td>
+								<td class="formattd">
+								   <pre class="brush:html;toolbar:false">&lt;zdw:pre&gt;
+    &lt;a href=&#39;&lt;zdw:field name=&quot;docurl&quot;/&gt;&#39;&gt;&lt;zdw:field name=&quot;comm_title&quot;/&gt;&lt;/a&gt;
+&lt;/zdw:pre&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>无</td>
+											<td class="usableattrval">
+												无
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>用在内容页面，获取上一篇文档的信息，如果没有上一篇文档，则显示"没有了"</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+								   <pre class="brush:html;toolbar:false">&lt;zdw:pre&gt;
+	&lt;a href=&#39;&lt;zdw:field name=&quot;docurl&quot;/&gt;&#39;&gt;&lt;zdw:field name=&quot;comm_title&quot;/&gt;&lt;/a&gt;
+&lt;/zdw:pre&gt;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+						</table>
+						<!--/一个标签tag:pre-->
+						
+						<!--一个标签tag:next-->
+						<table class="table table-bordered  table-condensed onetagtable" id="tagnextintro">
+							<caption>next标签介绍</caption>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">next格式</td>
+							</tr>
+							<tr>
+								<td>格式:</td>
+								<td class="formattd">
+								   <pre class="brush:html;toolbar:false">&lt;zdw:next&gt;
+	&lt;a href=&#39;&lt;zdw:field name=&quot;docurl&quot;/&gt;&#39;&gt;&lt;zdw:field name=&quot;comm_title&quot;/&gt;&lt;/a&gt;
+&lt;/zdw:next&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>无</td>
+											<td class="usableattrval">
+												无
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>用在内容页面，获取下一篇文档的信息，如果没有下一篇文档，则显示"没有了"</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+									<pre class="brush:html;toolbar:false">&lt;zdw:next&gt;
+	&lt;a href=&#39;&lt;zdw:field name=&quot;docurl&quot;/&gt;&#39;&gt;&lt;zdw:field name=&quot;comm_title&quot;/&gt;&lt;/a&gt;
+&lt;/zdw:next&gt;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+						</table>
+						<!--/一个标签tag:next-->
+						<!--一个标签tag:comment-->
+						<table class="table table-bordered  table-condensed onetagtable" id="tagcommentintro">
+							<caption>comment标签介绍</caption>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">comment格式</td>
+							</tr>
+							<tr>
+								<td>格式:</td>
+								<td class="formattd">
+								   <pre class="brush:html;toolbar:false">&lt;zdw:comment /&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>无</td>
+											<td class="usableattrval">
+												无
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>使用乐之者cms的评论功能</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+									<pre class="brush:html;toolbar:false">&lt;zdw:comment /&gt;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+						</table>
+						<!--/一个标签tag:comment-->
+						<!--一个标签tag:relations-->
+						<table class="table table-bordered  table-condensed onetagtable" id="tagrelationsintro">
+							<caption>relations标签介绍</caption>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">relations格式</td>
+							</tr>
+							<tr>
+								<td>格式:</td>
+								<td class="formattd">
+								   <pre class="brush:html;toolbar:false">&lt;zdw:relations count=&quot;想要获取的相关文章的数量&quot;&gt;
+    &lt;zdw:relation name=&quot;文章属性值&quot;/&gt;							
+&lt;/zdw:relations&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>count</td>
+											<td class="usableattrval">
+												数字，表示想要获取的相关文章的数量
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>只能在内容页使用，与relation合用获取与当前文章相关的文章</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+									<pre class="brush:html;toolbar:false">&lt;zdw:relations count=&quot;6&quot;&gt;
+	&lt;zdw:relation name=&quot;index&quot;/&gt;							
+        &lt;a href=&#39;&lt;zdw:relation name=&quot;docurl&quot;/&gt;&#39;&gt;
+        	&lt;zdw:relation name=&quot;comm_title&quot;/&gt;
+        &lt;/a&gt;
+&lt;/zdw:relations&gt;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+						</table>
+						<!--/一个标签tag:relations-->
+						<!--一个标签tag:relation-->
+						<table class="table table-bordered  table-condensed onetagtable" id="tagrelationintro">
+							<caption>relation标签介绍</caption>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">relation格式</td>
+							</tr>
+							<tr>
+								<td>格式:</td>
+								<td class="formattd">
+								  参考relations标签
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>name</td>
+											<td class="usableattrval">
+												index(相关文章的下标)、comm_title(标题)、docurl(访问路径)
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>只能在内容页使用，与relations合用获取与当前文章相关的文章</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+									参考relations
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+						</table>
+						<!--/一个标签tag:relation-->
+				</div>	<!-- /内容模板独有标签结束 -->	
+				<div class="onetypetagcontainer forsinglepagetr">
+					<section class="sep">单页面栏目模板独有标签</section>	
+					<!-- 单页面栏目模板独有标签开始 -->	
+					<!--一个标签tag:content-->
+						<table class="table table-bordered  table-condensed onetagtable" id="tagcontentintro">
+							<caption>content标签介绍</caption>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">content格式</td>
+							</tr>
+							<tr>
+								<td>格式:</td>
+								<td class="formattd">
+								   <pre class="brush:html;toolbar:false">&lt;zdw:content/&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>无</td>
+											<td class="usableattrval">
+												无
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>取得单页面的内容</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+									 <pre class="brush:html;toolbar:false">&lt;zdw:content/&gt;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+						</table>
+						<!--/一个标签tag:content-->
+				</div>	<!-- /单页面栏目模板独有标签结束 -->	
+				<div class="onetypetagcontainer forsearchtr">
+					<section class="sep">搜索模板独有标签</section>	
+					<!-- 搜索模板独有标签开始 -->	
+						<!--一个标签tag:results-->
+						<table class="table table-bordered  table-condensed onetagtable" id="tagresultsintro">
+							<caption>results标签介绍</caption>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">results格式</td>
+							</tr>
+							<tr>
+								<td>格式:</td>
+								<td class="formattd">
+								    <pre class="brush:html;toolbar:false">&lt;zdw:results&gt;
+   &lt;a href=&#39;&lt;zdw:searchitem name=&quot;docurl&quot;/&gt;&#39;&gt;&lt;zdw:searchitem name=&quot;title&quot;/&gt;&lt;/a&gt;
+   &lt;zdw:searchitem name=&quot;intro&quot;/&gt;
+&lt;/zdw:results&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>无</td>
+											<td class="usableattrval">
+												无
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>结合searchitem标签获取搜索结果</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+									  <pre class="brush:html;toolbar:false">&lt;zdw:results&gt;
+   &lt;a href=&#39;&lt;zdw:searchitem name=&quot;docurl&quot;/&gt;&#39;&gt;&lt;zdw:searchitem name=&quot;title&quot;/&gt;&lt;/a&gt;
+   &lt;zdw:searchitem name=&quot;intro&quot;/&gt;
+&lt;/zdw:results&gt;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+						</table>
+						<!--/一个标签tag:results-->
+						
+						<!--一个标签tag:searchitem-->
+						<table class="table table-bordered  table-condensed onetagtable" id="tagsearchitemintro">
+							<caption>searchitem标签介绍</caption>
+							<!--一个标签的一个格式开始-->
+							<tr class="success">
+								<td colspan="2">searchitem格式</td>
+							</tr>
+							<tr>
+								<td>格式:</td>
+								<td class="formattd">
+								    <pre class="brush:html;toolbar:false">&lt;zdw:results&gt;
+    &lt;zdw:searchitem 属性名=&quot;属性值&quot;/&gt;
+&lt;/zdw:results&gt;</pre>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="attrtabletd">
+									<table class="table  table-condensed attrtable">
+										<tr>
+											<td><span class="attrtabletitle">可用属性</span><span class="glyphicon glyphicon-question-sign necessarytip"></span></td>
+											<td><span class="attrtabletitle">属性可用值</span></td>
+										</tr>
+										<tr>
+											<td>name<i class="necessary">*</i></td>
+											<td class="usableattrval">
+												<span>docurl(内容访问地址)、</span><span>title(内容标题)、</span>
+												<span>intro(内容简介)</span>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>功能介绍:</td>
+								<td>结合results标签获取搜索结果</td>
+							</tr>
+							<tr>
+								<td >用法举例:</td>
+								<td class="useexampletd">
+									<pre class="brush:html;toolbar:false">&lt;zdw:results&gt;
+   &lt;a href=&#39;&lt;zdw:searchitem name=&quot;docurl&quot;/&gt;&#39;&gt;&lt;zdw:searchitem name=&quot;title&quot;/&gt;&lt;/a&gt;
+   &lt;zdw:searchitem name=&quot;intro&quot;/&gt;
+&lt;/zdw:results&gt;</pre>
+								</td>
+							</tr>
+							<!--/一个标签的一个格式结束-->
+						</table>
+						<!--/一个标签tag:searchitem-->
+				</div>	<!-- /搜索模板独有标签结束 -->	
+			  </div><!--/panel-body-->
+		    </div><!--/panel一个panel代表左侧的一大类-->
+	      </section><!--/右侧-->
+        </div><!--/row-->
+
+		<div class="gotop">
+			<i class="glyphicon glyphicon-menu-up"></i>
+		</div>
+		<div class="floatslider"></div>
+				<zdw:include file="foot.html"/>
+	</section>
+  </body>
+  
+<script>
+	$(function () {
+		//通用标签内容的填充
+		var commhtml=$("#forcommtr td:eq(1)").html();
+		$("#forindextr td:eq(1)").prepend(commhtml);
+		$("#forcovertr td:eq(1)").prepend(commhtml);
+		$("#forlisttr td:eq(1)").prepend(commhtml);
+		$("#forcontenttr td:eq(1)").prepend(commhtml);
+		$("#forsinglepagetr td:eq(1)").prepend(commhtml);
+		$("#forsearchtr td:eq(1)").prepend(commhtml);
+        $('.leftslider .glyphicon-question-sign').poshytip({
+        	alignX:"right",
+        	alignY:"center",
+        	offsetX:20,
+            content:function () {
+                var tip= $(this).parent().next().text();
+                return tip;
+            }
+        });
+        $('.necessarytip').poshytip({
+            content:function () {
+                var tip= "带有\"<i class='necessary'>*<\/i>\"表示该属性不能省略";
+                return tip;
+            }
+        });
+        $('.usabletagtip').poshytip({
+        	//alignTo: 'cursor',// 'cursor', 'target' 相对的基准点
+        	//alignX: 'center',//'right', 'center', 'left', 'inner-left', 'inner-right'
+        	alignY: 'bottom',// 'bottom', 'center', 'top', 'inner-bottom', 'inner-top'
+        	//offsetX: 0,//水平方向偏移值，跟alignX达到的效果同，更精细
+        	offsetY: 20,
+            content:function () {
+                var tip= "橘黄色表示通用标签,深红色表示本模板独有标签";
+                return tip;
+            }
+        });
+        var $root = $('html, body');
+        //锚点连接动画效果
+        $('body').on("click","a",function() {
+           $root.animate({
+                scrollTop: $($(this).attr('href')).offset().top-50
+            }, 500);
+            return false;
+        });
+	//返回顶部显示与隐藏
+        var viewpoartHeight=(document.documentElement.clientHeight||document.body.clientHeight)/2;
+        $(window).scroll(function (e) {
+            if($(this).scrollTop()>viewpoartHeight){
+                $(".gotop").css("opacity","1");
+				/*
+				 * <div class="btn-group-vertical">
+				 <button type="button" class="btn btn-default active" name="commontag">
+				 通用标签
+				 </button>
+				 </div>
+				 * */
+				if($(".floatslider").text().length==0){
+                    var htmlstr='<div class="btn-group-vertical">';
+                    //得到当前激活的左侧菜单上的文字
+                    var activeTxt=$(".leftslider button.active").children("div:first").text();
+                    htmlstr+='<button type="button" class="btn btn-info minusheight">';
+                    htmlstr+=activeTxt;
+                    htmlstr+='</button>';
+                    //:visible筛选可见的，即便是祖先加的隐藏，也不能被筛选到
+                    $("section.sep").nextAll("table:visible").find("caption").each(function (i,v) {
+                    	var reg=/\w+/gi;
+                    	var captionTxt=$(v).text();
+                    	var wArr=reg.exec(captionTxt);
+                    	var myTagName=wArr[0];
+                    	var hrefTo="#tag"+myTagName+"intro";
+                        htmlstr+='<button type="button" class="btn btn-default minusheight">';
+                        htmlstr+='<a href="'+hrefTo+'">'+captionTxt+'</a>';
+                        htmlstr+='</button>';
+                    });
+                    htmlstr+="</div>";
+                    $(".floatslider").html(htmlstr);
+				}
+                $(".floatslider").css("display","block");
+            }else{
+                $(".gotop").css("opacity","0");
+                $(".floatslider").css("display","none");
+			}
+        });
+        //点击返回顶部
+        $(".gotop").click(function () {
+            $root.animate({scrollTop:0}, 500);
+        });
+        //页面加载完成时可用标签显示与隐藏
+        $(".usabletagtable tr[id^=for]").addClass("hiddenele");
+        $("#forcommtr").removeClass("hiddenele");
+        //页面加载完成时明细可用标签显示与隐藏
+        $(".panel-body div.onetypetagcontainer").each(function(i,v){
+        	$(v).addClass("hiddenele");
+        });
+        
+        //左边导航点击
+		$(".leftslider button").click(function () {
+			//激活效果
+			$(this).siblings("button").removeClass("active");
+			$(this).addClass("active");
+            $(".floatslider").html("");
+            //可用标签显示与隐藏
+            var btnName=$(this).attr("name");
+            $(".usabletagtable tr[id^=for]").addClass("hiddenele");
+            $("#"+btnName).removeClass("hiddenele");
+            //明细可用标签显示与隐藏
+            $(".panel-body div.onetypetagcontainer").each(function(i,v){
+            	if($(v).hasClass(btnName)){
+            		$(v).removeClass("hiddenele");
+            	}else{
+            		$(v).addClass("hiddenele");
+            	}
+            });
+        });
+    });
+
+</script>
+</html>

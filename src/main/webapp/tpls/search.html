@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	 <link rel="shortcut icon" href="<zdw:tpl_path/>/imgs/favicon.ico" type="image/x-icon">
+    <title>搜索结果-乐之者cms</title>
+    <meta name="keywords" content="搜索结果-乐之者cms" />
+    <meta name="description" content="搜索结果-乐之者cms" />
+    <link href="<zdw:tpl_path/>/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<zdw:tpl_path/>/style/common.css" rel="stylesheet">
+    <link href="<zdw:tpl_path/>/style/search.css" rel="stylesheet">
+     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container-fluid">
+	    <section class="row topsec">
+			   <zdw:include file="head.html"/>
+			  	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			  	   <ol class="breadcrumb">		
+						<zdw:pathlist>
+						  <li><a href='<zdw:path name="link"/>'><zdw:path name="name"/></a></li>
+						</zdw:pathlist> 
+						<li class="download">
+							<a href="<zdw:global_field name='lzzcms_downloadurl'/>">下载最新版乐之者内容管理系统(乐之者cms)</a>
+						</li>
+				   </ol> 
+			  	</div>
+		</section>
+		<zdw:results>
+    		    <div  class="panel panel-info oneitem">
+				  <div class="panel-body">
+			  		<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<a href='<zdw:searchitem name="docurl"/>' class="conttitle">
+			    			    <zdw:searchitem name="title"/> 
+			    			</a>
+						</div>
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 contintro">
+							   <zdw:searchitem name="intro"/>
+						</div>
+				    </div>
+				  </div>
+				</div>
+	    </zdw:results>
+		<zdw:include file="foot.html"/>
+	</div>
+  </body>
+</html>

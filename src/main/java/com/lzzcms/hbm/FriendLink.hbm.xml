@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.lzzcms.model">
+    <class name="FriendLink" table="lzz_friendlink" >
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="linkDesc" type="string"  column="linkdesc"/>
+        <property name="type" type="java.lang.Byte"  column="type"/>
+        <property name="url" type="string"  column="url"/>
+    </class>
+</hibernate-mapping>
+

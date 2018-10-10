@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	    http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+	
+	<context:component-scan base-package="com.lzzcms.web.action" use-default-filters="false" >
+	<!-- include-filter要配合use-default-filters="false"跟另外加上 exclude-filter效果一样-->
+		<context:include-filter type="annotation"  expression="org.springframework.stereotype.Controller"></context:include-filter>
+	<!--	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"></context:exclude-filter>
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"></context:exclude-filter>
+	-->	
+	</context:component-scan>
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
+		<property name="prefix" value="/WEB-INF/lzzcms/jsps/"></property>
+		<property name="suffix" value=".jsp"></property>
+		<property name="order" value="2"></property>
+	</bean>
+	 <mvc:annotation-driven ></mvc:annotation-driven>
+	<mvc:default-servlet-handler/>
+	
+	<mvc:interceptors>
+	    <mvc:interceptor>
+	    	<mvc:mapping path="/**"/><!-- 前提：/backstage下面的所有路径 -->
+	    	<mvc:exclude-mapping path="/fromInterceptor"/><!-- 权限验证跳转前提：/backstage下面的 -->
+	    	<mvc:exclude-mapping path="/error/**"/><!-- 错误页面 前提：/backstage下面的 -->
+	    	<mvc:exclude-mapping path="/updateAndgetClick"/><!--前端得到点击量 前提：/backstage下面的 -->
+		    <bean class="com.lzzcms.web.interceptors.PageInterceptor"></bean>
+	    </mvc:interceptor>
+	    <mvc:interceptor>
+	    	<mvc:mapping path="/**"/><!-- 前提：/backstage下面的所有路径 -->
+	    	<mvc:exclude-mapping path="/fromInterceptor"/><!-- 权限验证跳转前提：/backstage下面的 -->
+	    	<mvc:exclude-mapping path="/error/**"/><!-- 错误页面 前提：/backstage下面的 -->
+	    	<mvc:exclude-mapping path="/updateAndgetClick"/><!--前端得到点击量 前提：/backstage下面的 -->
+	    	<mvc:exclude-mapping path="/crawlTask"/><!--定时任务 前提：/backstage下面的 -->
+		    <bean class="com.lzzcms.web.interceptors.AuthInterceptor"></bean>
+	    </mvc:interceptor>
+	</mvc:interceptors>
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8"></property>
+		   <!-- 指定所上传文件的总大小,单位字节。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 ：5M-->  
+    	<property name="maxUploadSize" value="5242880"/>
+    	<!-- 超出上面配置的最大大小限制，默认不进入action,而会抛出org.apache.commons.fileupload.FileUploadBase$SizeLimitExceededException异常，这里做出配置 -->
+    	<property name="resolveLazily" value="true"/>
+	</bean>
+</beans>

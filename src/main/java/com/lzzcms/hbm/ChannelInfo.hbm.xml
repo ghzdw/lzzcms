@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.lzzcms.model">
+    <class name="ChannelInfo" table="lzz_channelinfo" dynamic-update="true" dynamic-insert="true" >
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="channelName" type="string" length="30"  column="channelname"/>
+        <property name="commonTable" type="string" length="60" column="commontable"/>
+        <property name="additionalTable" type="string" length="60" column="additionaltable"/>
+        <property name="enName" type="string"  length="60" column="enname"/>
+    </class>
+</hibernate-mapping>
+

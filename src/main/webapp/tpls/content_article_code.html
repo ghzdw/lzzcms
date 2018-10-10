@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		 <link rel="shortcut icon" href="<zdw:tpl_path/>/imgs/favicon.ico" type="image/x-icon">
+     <title><zdw:field name="comm_title"/>-<zdw:field name="indextitle"/></title>
+    <meta name="keywords" content="<zdw:field name='comm_keywords'/>" />
+    <meta name="description" content="<zdw:field name='comm_desc'/>" />
+    <link href="<zdw:tpl_path/>/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<zdw:tpl_path/>/style/common.css" rel="stylesheet">
+    <link href="<zdw:tpl_path/>/style/content_article_code.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<zdw:tpl_path/>/SyntaxHighlighter/shCoreDefault.css">
+ 	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<zdw:tpl_path/>/SyntaxHighlighter/shCore.js"></script>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+  </head>
+  <body>
+  	<div class="container-fluid"> 
+		<section class="row topsec">
+		   <zdw:include file="head.html"/>
+		  	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		  	   <ol class="breadcrumb">		
+					<zdw:pathlist>
+					  <li><a href='<zdw:path name="link"/>'><zdw:path name="name"/></a></li>
+					</zdw:pathlist> 
+					<li class="download">
+						<a href="<zdw:global_field name='lzzcms_downloadurl'/>">下载最新版乐之者内容管理系统(乐之者cms)</a>
+					</li> 
+			   </ol> 
+		  	</div>
+	    </section>
+		<div class="row midsec ">
+			<!-- 960*90-内容页横幅开始 -->
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 adcenter">
+				<script type="text/javascript">
+				    /*960*90-内容页横幅*/
+				    var cpro_id = "u3459172";
+				</script>
+				<script type="text/javascript" src="//cpro.baidustatic.com/cpro/ui/c.js"></script>
+			</div>
+			<!-- 960*90-内容页横幅结束 -->
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cont">
+				<h2><a href='<zdw:field name="docurl" />'><zdw:field name="comm_title"/></a></h2>
+	            <div class="continfo">
+	            	 <zdw:choose>
+				        <zdw:when test='${empty comm_src_url}'>
+				        	 <span>发布人:</span><span><zdw:field name="author_name"/></span>
+				        </zdw:when>  
+				        <zdw:otherwise>
+				        	<span>参考/转载:</span>
+				        	<span>
+				        	<a href='<zdw:field name="comm_src_url"/>'><zdw:field name="comm_title"/></a>
+				        	</span>
+				        </zdw:otherwise>                         
+				    </zdw:choose>  
+			        	<span>发布时间:</span><span><zdw:field name="comm_publishdate"/></span>
+		            	<span>点击量:</span><span><zdw:field name="comm_click"/></span>
+	            </div>
+			</div>
+			<!-- 百度分享开始 -->
+			<div class="cent_mid" >
+            	<div class="share">分享给更多人知道:</div>
+	            <div class="bdsharebuttonbox">
+	            	<a href="#" class="bds_more" data-cmd="more"></a>
+	            	<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	            	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	            	<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+	            	<a href="#" class="bds_bdysc" data-cmd="bdysc" title="分享到百度云收藏"></a>
+	            	<a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+	            	<a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+	            </div>
+				<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+			</div>
+			<!-- 百度分享 结束-->
+	        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 cont leftspace">
+	            <div id="maincont"><zdw:field name="mainbody"/>
+	            
+	            <zdw:choose>
+				        <zdw:when test='${empty comm_src_url}'>
+				        	 <div class="imp">
+				        	 	本文地址:<a href='<zdw:field name="docurl" />'><zdw:field name="docurl" /></a>,版权所有,转载请注明出处
+				        	 </div>
+				        </zdw:when>  
+				        <zdw:otherwise>
+				        </zdw:otherwise>                         
+				 </zdw:choose> 
+	            </div>
+	            <section id="seqdoc">
+	                <p>上一篇<i class="iconfont pospg">&#xe67e;</i><zdw:pre>
+						<a href='<zdw:field name="docurl"/>'><zdw:field name="comm_title"/></a>
+					</zdw:pre>
+					</p>
+					 <p>下一篇<i class="iconfont pospg">&#xe7a5;</i><zdw:next>
+						<a href='<zdw:field name="docurl"/>'><zdw:field name="comm_title"/></a>
+					</zdw:next>
+					</p>
+				</section>
+				<!-- 相关文章 -->
+				<section id="relation" class="row">
+					<section class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+						<section  class="tagstyle">相关推荐</section>
+						<ul>
+							<zdw:relations count="6">
+								<li>
+									<div class="item">
+										<span class="bg"><zdw:relation name="index"/></span>
+										<span class="titletxt">
+											<a href='<zdw:relation name="docurl"/>'>
+												<zdw:relation name="comm_title"/>
+											</a>
+										</span>
+									</div>
+								</li>
+							</zdw:relations>
+						</ul>
+					</section>
+				</section>
+				<!-- 评论start -->
+				<zdw:comment/>
+				<!-- 评论结束 -->
+	        </div>
+	         <div class="col-lg-2  col-md-2  col-sm-2 hidden-xs">
+	            <ul class="list-group">
+			         <zdw:clnlist type="list">
+			            <li class="list-group-item"><a href="<zdw:field name='url'/>"><zdw:field name="name"/></a></li>
+				    </zdw:clnlist>	
+			    </ul> 
+	        </div>
+	     </div>
+		<zdw:include file="foot.html"/>
+		
+		<!-- 提示模态框 -->
+		<div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" id="imgModal">
+		  <div class="modal-dialog mydiawidth">
+		    <div class="modal-content">
+		      <div class="modal-body">
+		      	<span class="imgclose">&times;</span>
+		        <img id="diaimg" src=""/>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		
+	</div>
+	<script type="text/javascript">
+	//给a加上样式
+		$.each($("#seqdoc a"),function(i,obj){
+			if($(obj).prop("href")=="javascript:void(0);"){
+				$(obj).addClass("no");
+			}
+		});
+	 	//图片点击放大
+	 	$("#maincont img").click(function(){
+	 		$("#diaimg").prop("src",$(this).prop("src"));
+	 		var obj=getRealImgSize(this);
+	 		$(".mydiawidth").width(obj.width+20);
+	 		$(".mydiawidth").height(obj.height);
+	 		$("#imgModal").modal("show");
+	 	});
+	 	function getRealImgSize(img){
+	 		var obj={};
+	 		if (typeof img.naturalWidth == "undefined"
+ 				|| typeof img.naturalHeight == "undefined") {// IE 6/7/8
+ 			　　var i = new Image();
+ 			　　i.src = myimage.src;
+ 				obj["width"]=i.width;
+ 				obj["height"]=i.height;
+ 			}else {// 支持HTML5的浏览器
+				obj["width"]=img.naturalWidth;
+ 				obj["height"]=img.naturalHeight;
+ 			}
+	 		return obj;
+	 	}
+	 	//关闭图片显示对话框
+	 	$(".imgclose").click(function(){
+	 		$("#imgModal").modal("hide");
+	 	});
+	</script>
+  </body>
+</html>

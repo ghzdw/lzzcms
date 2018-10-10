@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.lzzcms.model">
+    <class name="Role" table="lzz_role">
+        <id name="roleId" column="roleid">  
+            <generator class="identity"/>
+        </id>
+        <property name="roleName" length="50" not-null="true" column="rolename"/>
+        <property name="roleValue"  not-null="true" column="rolevalue"/>
+        <property name="roleDesc"  not-null="false" column="roledesc"/>
+        
+        <set name="adminInfos" table="link_admin_role" inverse="true">
+	        <key column="role_id"></key>
+	        <many-to-many class="AdminInfo" column="admin_id"></many-to-many>
+        </set>
+        <set name="rights" table="link_role_right"  >
+	        <key column="role_id"></key>
+	        <many-to-many class="RightInfo" column="right_id"></many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
+

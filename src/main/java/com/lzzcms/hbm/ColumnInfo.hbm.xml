@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.lzzcms.model">
+    <class name="ColumnInfo" table="lzz_columninfo" dynamic-update="true" dynamic-insert="true" >
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="name" type="string" length="30"  column="name"/>
+        <property name="orderNo" type="int"  column="orderno"/>
+        <property name="htmlDir" type="string" length="100"  column="htmldir"/>
+ 	    <many-to-one name="clnType" class="ColumnType" column="clntype" fetch="join"/>
+        <property name="outLink" type="string" length="100"  column="outlink"/>
+        <property name="myTpl" type="string" length="100"  column="mytpl"/>
+        <property name="contentTplName" type="string" length="100"  column="contenttplname"/>
+        <property name="clnTitle" type="string" length="100"  column="clntitle"/>
+        <property name="clnKeyWords" type="string" length="200"  column="clnkeywords"/>
+        <property name="clnDesc" type="string" length="400"  column="clndesc"/>
+        <property name="singleContent" type="text"   column="singlecontent"/>
+        <property name="personalStyle" type="string" length="150"  column="personalstyle"/>
+        <property name="commHtmlIsUpdated" type="string" length="5"  column="comm_html_isupdated"/>
+        
+        
+	   	<many-to-one name="channelInfo" class="ChannelInfo" column="channel_id" fetch="join"/>
+	   	<set name="contents" table="lzz_commoncontent" inverse="true" cascade="delete" >
+	   	     <key column="column_id" />
+	     	 <one-to-many class="CommonContent"/>
+	   	</set> 
+	   	<!-- 修改栏目页面要查出 -->
+	    <many-to-one name="columnInfo" class="ColumnInfo" column="parentid" fetch="join"/>
+    </class>
+</hibernate-mapping>
+

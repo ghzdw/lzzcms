@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.lzzcms.model">
+    <class name="RightInfo" table="lzz_right"  dynamic-insert="true" >
+        <id name="rightId" column="rightid">
+            <generator class="native"/>
+        </id>
+        <property name="rightName" type="string" length="30"  column="rightname"/>
+        <property name="canAssign" type="string" length="60" column="CANASSIGN"/>
+        <property name="rightUrl" type="string" length="150" column="righturl"/>
+        
+        <set name="childrenRightInfos" table="lzz_right" inverse="true" cascade="delete" order-by="parent_id asc">
+	   	     <key column="parent_id" />
+	     	<one-to-many class="RightInfo"/>
+	   	</set> 
+	   	
+	   	<many-to-one name="parentRightInfo" class="RightInfo" column="parent_id"/>
+	   	
+	    <set name="roles" table="link_role_right" inverse="true">
+	        <key column="right_id"></key>
+	        <many-to-many class="Role" column="role_id"></many-to-many>
+        </set>
+	   	
+	    <property name="rightGroup" type="int"  column="rightgroup"/>	
+	    <property name="rightCode" type="long"  column="rightcode"/>	
+	    <property name="common" type="boolean"  column="common" />	
+	    <property name="type" type="string"  column="righttype" />	
+	    <property name="orderNo" type="int"  column="ORDERNO"/>	
+    </class>
+</hibernate-mapping>
+

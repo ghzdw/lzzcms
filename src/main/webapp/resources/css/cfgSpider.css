@@ -1,0 +1,340 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{
+	margin: 0;
+	padding: 0;
+}
+html,body {
+	overflow:hidden;
+	color:#717171;
+	-webkit-overflow-scrolling:touch;
+	-webkit-tap-highlight-color:transparent;
+	-webkit-touch-callout:none;
+	user-select:none;
+	width:100%;
+	height:100%;
+}
+body,input,select,textarea {
+	font-family:-apple-system,'SFNS Display',' Helvetica Neue',Helvetica,Arial,'PingFang SC','Noto Sans CJK SC','Source Han Sans CN','Hiragino Sans GB','Lantinghei SC','Heiti SC','Microsoft YaHei',sans-serif;
+	font-weight:300;
+}
+.main {
+	position:absolute;
+	top:0px;
+	left:0px;
+	overflow-y:scroll;
+	width:100%;
+	height:100%;
+	background:#fff;
+}
+/*顶部区域开始*/
+.main .top {
+	position:fixed;
+	top:0px;
+	right:0px;
+	z-index:9000;
+	width:100%;
+	background:#162F42;
+	color:#f7f7f7;
+	text-align:center;
+	height:50px;
+	overflow:hidden;
+}
+.main  .top .title {
+	font-size:17px;
+	height:50px;
+	width:100%;
+	display:inline-block;
+}
+.main  .top .title .targetTitleParent {
+	width:60%;
+	margin:0 auto;
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	padding-top: 4px;
+}
+.main  .top .title .tip {
+	width:50%;
+	display:inline-block;
+	color:rgba(255,255,255,.8);
+	font-size:14px;
+}
+.main  .top .start {
+	position:absolute;/*.main和.top都有定位，此处相对于较近的.top*/
+	top:7px;
+	right:40px;
+	height:35px;
+	line-height:35px;
+	cursor:pointer;
+	background:#f7f7f7;
+	color:#1D2E3B;
+	border-radius:20px;
+	width:100px;
+	border:1px solid;
+}
+.main  .top .start:hover {
+	opacity:.9;
+}
+.main  .top .start.disabled {
+	opacity:.2;
+}
+/*顶部区域结束*/
+
+
+.main  .bottom {
+	position:fixed;
+	z-index:9000;
+	width:100%;
+	-webkit-transition:bottom .3s linear;
+	-moz-transition:bottom .3s linear;
+	-ms-transition:bottom .3s linear;
+	-o-transition:bottom .3s linear;
+	transition:bottom .3s linear;
+	color:#f7f7f7;
+	text-align:left;
+	height:223px;
+	overflow-y:hidden;
+	bottom:-180px;
+	background:#162F42;
+}
+/*底部表示"已选中xx列"的headLine开始*/
+.main  .bottom .headLine{
+	height:42px;
+	line-height:42px;
+	background:#162F42;
+	cursor:pointer;
+	border-bottom:solid 1px #858f94;
+}
+.headLine label{
+	cursor: pointer;
+}
+.statussign{
+	position:absolute;/*相对于有定位属性的最近的.bottom*/
+	top:7px;
+	right:40px;
+	width:29px;
+	height: 29px;
+}
+.questionimg{
+	width: 21px;
+	height: 21px;
+	overflow: hidden;
+	position: absolute;
+	top: -1px;
+	left: 85px;
+}
+.questionimg img{
+	position: absolute;/*相对于.questionimg*/
+	top:0px;
+	left:0px;
+	width: 21px;
+	outline: 0 none;
+	border: 0;
+}
+.flipcfg{
+	margin-left:40px;
+	position: relative;
+}
+.listcfg{
+	position: relative;
+}
+/*底部表示已选中xx列的headLine结束*/
+
+.main  .bottom .headarea {
+	height:40px;
+	overflow:hidden;
+	background:#162F42;
+	cursor: pointer;
+	white-space:nowrap;
+	font-size: 0;
+}
+.onehead{
+	font-size:17px;
+	width:294px;
+	display: inline-block;
+	height: 39px;
+	line-height: 39px;
+	text-align: left;
+	padding-left:5px;
+	border-bottom:1px solid  #4d5a60;
+	border-right:1px solid  #4d5a60;
+}
+.onehead>label{
+	cursor: pointer;
+}
+.onehead>label>input{
+	width:17px;
+	height: 17px;
+	margin-right: 10px;
+	position: relative;
+	top:3px;
+}
+.onehead i{
+	font-size:14px;
+	color:#ccc;
+}
+.onehead i,.onehead em{
+	font-style: normal;
+}
+.main  .bottom .bodyarea {
+	height:140px;
+	overflow: hidden;/*这里把overflow-y:auto改为hidden，是因为使用插件实现滚动条，保证各浏览器统一*/
+	cursor: pointer;
+	font-size: 0;
+}
+.oneitemul{
+	list-style: none;
+	width:299px;
+	border-right:1px solid  #4d5a60;
+	display: inline-block;
+	overflow: hidden;
+	vertical-align: top;/*在父元素中的对齐方式*/
+}
+.oneitemli {
+	font-size:15px;
+	width:251px;
+	height: 25px;
+	line-height: 25px;
+	text-align: left;
+	border-bottom:1px solid  #4d5a60;
+	padding:3px;
+	padding-left:5px;
+	padding-right:43px;
+	background:rgba(47,79,79,1);
+	overflow: hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	position: relative;
+}
+.oneitemli img{
+	width: 20px;
+	position: absolute;
+	top:6px;
+	right:1px;
+}
+.main  .bottom .bodyarea li:hover {
+	background:rgba(47,79,79,.7);
+}
+/*向左向右图片开始*/
+.main  .bottom .sliderLeftDiv.disabled,.main  .bottom .sliderRightDiv.disabled {
+	background: #858f94;
+}
+.main  .bottom .sliderLeftDiv,.main  .bottom .sliderRightDiv {
+	padding:80px 11px;/*223-43=180*/
+	font-size:18px;
+	display:block;
+	cursor:pointer;
+	width:9px;
+	height:20px;
+	background:#162f42;
+}
+.main  .bottom .sliderLeftDiv {
+	border-right:solid 1px #858f94;
+	float: left;
+}
+.main  .bottom .sliderRightDiv {
+	border-left:solid 1px #858f94;
+	float: right;
+}
+.main  .bottom .sliderLeftDiv:hover,.main  .bottom .sliderRightDiv:hover {
+	background:#0066a2;
+}
+.main  .bottom .sliderLeftDiv img,.main  .bottom .sliderRightDiv img {
+	width:8px;
+	height:20px;
+}
+/*向左向右图片结束*/
+#iframe{
+	margin-top: 50px;
+	margin-bottom: 43px;
+	boder:0;
+}
+.contouter{
+	position: relative;
+}
+.continner{
+	left: 32px;
+	right: 32px;
+	position: absolute;
+	overflow: hidden;
+	z-index: -999;
+	height:180px;
+}
+/*提示信息*/
+#listtip{
+	display: none;
+}
+#listtipdiv{
+	width: 300px;
+	height: 110px;
+	font-size: 14px;
+}
+#listtipdiv h4{
+	padding: 0;
+	text-align: center;
+	margin-bottom: 0px;
+	margin-top: 2px;
+}
+#listtipdiv  table,#listtipdiv  table tr,#listtipdiv  table td{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-collapse: collapse;
+}
+#listtipdiv  table tr{
+	height:22px;
+	line-height: 22px;
+}
+#listtipdiv  table tr td:first-child{
+	width: 70px;
+}
+#fliptip{
+	display: none;
+}
+#fliptipdiv{
+	width: 300px;
+	height: 110px;
+	font-size: 14px;
+}
+#fliptipdiv h4{
+	padding: 0;
+	text-align: center;
+	margin-bottom: 0px;
+	margin-top: 2px;
+}
+#fliptipdiv  table,#fliptipdiv  table tr,#fliptipdiv  table td{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-collapse: collapse;
+}
+#fliptipdiv  table tr{
+	height:22px;
+	line-height: 22px;
+}
+#fliptipdiv  table tr td:first-child{
+	width: 70px;
+}
+.nowcfgcolname{
+	color:red;
+}
+/*遮罩*/
+.backdroplayer{
+	height:100%;
+	background:black;
+	width:100%;
+	position: fixed;
+	top:0;
+	z-index: 9999;
+    opacity:.6;
+}
+.backdroplayer>img{ 
+	position: relative;
+	top:50%;
+	left:50%;
+}
+.backdroplayer.out{
+	display: none;
+}
+.backdroplayer.in{
+	display: block;
+}

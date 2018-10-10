@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	 <link rel="shortcut icon" href="<zdw:tpl_path/>/imgs/favicon.ico" type="image/x-icon">
+     <title><zdw:field name="clntitle"/></title>
+    <meta name="keywords" content="<zdw:field name='clnkeywords'/>" />
+    <meta name="description" content="<zdw:field name='clndesc'/>" />
+    <link href="<zdw:tpl_path/>/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<zdw:tpl_path/>/style/common.css" rel="stylesheet">
+    <link href="<zdw:tpl_path/>/style/lzzcms.css" rel="stylesheet">
+	 <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    	<div class="container-fluid">
+	     	<section class="row topsec">
+			   <zdw:include file="head.html"/>
+			  	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			  	   <ol class="breadcrumb">		
+						<zdw:pathlist>
+						  <li><a href='<zdw:path name="link"/>'><zdw:path name="name"/></a></li>
+						</zdw:pathlist> 
+						<li class="download">
+							<a href="<zdw:global_field name='lzzcms_downloadurl'/>">下载最新版乐之者内容管理系统(乐之者cms)</a>
+						</li> 
+				   </ol> 
+			  	</div>
+		    </section>
+		    <div class="jumbotron">
+				<div class="container">
+					<hgroup>
+						<h1 class="jumbotron-h1"><zdw:field name="name"/></h1>
+						<h4 class="jumbotron-h4"><zdw:field name="clndesc"/></h4>
+					</hgroup>
+				</div>
+			</div>
+    		<div class="row">
+    			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+    				<ul class="list-group">
+			  <li class="list-group-item"><a href="#download">下载</a></li>
+			  <li class="list-group-item"><a href="#useguide">使用向导</a></li>
+			  <li class="list-group-item"><a href="#versionchange">版本变更</a></li>
+			</ul>
+    			</div>
+    			<section class="col-lg-10 col-md-10 col-sm-10 col-xs-10 about">
+    				<div id="download">
+     				<h4 >下载</h4>
+     				<section class="cont">乐之者内容管理系统(cms)可以免费<a href="<zdw:index_path/>/download?toDown=lzzcms.war">下载</a>
+     				   并使用,至于如何使用请参见<a href="#useguide">使用向导</a>。如果你想获取乐之者内容管理系统(cms)的源码,请联系乐之者
+     				  团队购买。那么问题来了，既然可以免费使用，为什么还要购买源码呢？
+     				  <ul>
+     				  	<li>1.如果你是一个java爱好者，通过对源码的研究相信你一定会有所收获<img src="<zdw:tpl_path/>/imgs/yeah.gif">。</li>
+     				  	<li>2.需求总是变化万千，想要一个软件以不变应万变，几乎是不可能的事情，有了源码之后，<img src="<zdw:tpl_path/>/imgs/renxing.gif">你就可以任性的进行各种二次开发啦。</li>
+     				  	<li>3.你可以获取乐之者团队的技术支持，为你排忧解难在所不辞
+     				  	<img src="<zdw:tpl_path/>/imgs/blood.gif">，
+     				  	为你解决问题两肋插刀<img src="<zdw:tpl_path/>/imgs/knife.gif">。</li>
+     				  	<li>4.就当赞助一下咯，帮助乐之者团队运行下去<img src="<zdw:tpl_path/>/imgs/ding.gif">。</li>
+     				  	<li>5.价格便宜的超乎你的想象，<img class="bigimg" src="<zdw:tpl_path/>/imgs/hascms.gif">只需要100元
+     				  	<img class="bigimg"  src="<zdw:tpl_path/>/imgs/100.gif">你便可以拥有全套源码以及以上全套的服务。</li>
+     				  	<li>6.永久享受源码的版本升级</li>
+     				  </ul>
+     				  <span>联系方式：</span>  
+     				  <ul>
+                         <li>邮箱：1018757039@qq.com</li>
+                         <li>乐之者客服QQ:1018757039</li>
+                     </ul>
+                     <span>声明：</span>
+                     <span class="declare">
+                                                                 因为乐之者cms是免费使用的，你在使用过程中，如果因为操作不当等其他原因，对你造成损失(包括但不限于经济损失),
+                                                                乐之者团队概不负责。 作如此声明，只是为了杜绝一切纠纷发生的可能性，望谅解。                                           
+                     </span>
+     				</section>
+    				</div>
+    				<div id="useguide">
+    					<h4 >使用向导</h4>
+     				<section class="cont">详细使用请关注<a href="<zdw:index_path/>/s/spjc/lzzcmssyspjc/">乐之者cms使用视频教程</a>栏目的视频教
+     				程。为了更好的使用乐之者cms,当然了，不惟乐之者cms，所有的cms都是一个道理，首先要弄懂几个概念：
+      				<ul class="useguideul">
+      					<li><span class="bigcatalog">一.模型</span>：又叫频道，是一个意思，只是叫法不同罢了。一类具有共同特征的事物就可以归为一个模型。举个栗子：乐之者cms内
+      				置了一个名为“普通文章”的模型，"普通文章"这个模型有什么共同特征呢？都有文章主题内容这样一个属性。那么如果我做的
+      				网站是软件下载类的，就不可避免的有一些诸如"软件大小"、"软件名称"、"是否是国产"这类的属性，而这些属性是"普通文章"
+      				这种模型所不具备的，这时就可以新建一个"软件"类的模型啦，当然了不新建模型也可以，具体请参考<a href="<zdw:index_path/>/s/spjc/lzzcmssyspjc/">乐之者cms使用视频教程</a>
+      				的视频教程。以此类推,模型可以随便新建修改，比如"图片"模型、"视频"模型等等。</li>
+      					<li><span class="bigcatalog">二.栏目</span>：栏目是属于一个模型的，拿上边的例子来说，新建了"软件"模型后，你可以在其下面新建诸如"游戏软件"、"办公软件"、"系统软件"之类。
+      				一个模型下可以有多个栏目，一个栏目可以有后代栏目。</li>
+      					<li><span class="bigcatalog">三.内容</span>：有了栏目，才可以在栏目下新建一篇内容，内容可以是一片文章，一部电影，一张图片，一个软件。一个栏目下理论上来说可以有无数个内容。
+      					</li>
+      					<li><span class="bigcatalog">四.栏目的类型</span>：
+      					   <ul>
+      					   		<li>1.封面：就像目录一样，封面类型的栏目展现的是栏目级别的信息，比如
+      					   			<a href="<zdw:index_path/>/s/spjc/">视频教程</a>这个页面
+      							</li>
+      					   		<li>2.列表：列表类型的栏目展现的是内容的列表，你可以选择列表中的任意一项点击进入到展现内
+	      					   		容的具体页面。比如<a href="<zdw:index_path/>/s/spjc/lzzcmssyspjc/">乐之者
+	      					   		cms使用视频教程</a>就是列表类型的栏目
+      							</li>
+      					   		<li>3.外部链接：这个最简单了，就是点击这个栏目可以跳转到外部的网站这个意思</li>
+      					   		<li>4.单页面：单页面类型的栏目没有子栏目(有子栏目的叫做封面栏目)，也没有多个内容形成内容列表(有多篇内容的叫列表栏目)，栏目本身就是存放内容的，
+      								比如<a href="<zdw:index_path/>/s/cmsbqck/">cms标签参考</a>，公司简介，关于我们等
+      							</li>
+      					   </ul>
+      					</li>
+      					<li><span class="bigcatalog">五.栏目的模板</span>:
+      				     模板是书写cms标签的html文件，乐之者cms系统的模板必须放在tpls文件夹下面。模板是与栏目对应的，创建或者修改栏目的时候可以指定该栏目使用的
+      				     模板文件，模板文件的名字随便起的，比如xxx.html。
+      				     <ul>
+      				     	<li> 1.封面栏目模板介绍：当栏目类型为封面时，可以指定默认模板，默认模板就是指这个栏目
+      				     		使用哪个模板
+      				     	</li>
+      				     	<li>2.列表栏目模板介绍：当栏目类型为列表时，可以指定默认模板和内容模板，默认模板就是指这个栏目
+      				     		使用哪个模板，内容模板是指本栏目下边的内容使用哪个模板	
+      				     	</li>
+      				     	<li>3.外部链接类型因为直接跳转到外部网站，不需要模板，只需要填写链接地址就可以了</li>
+      				     	<li>4.单页面模板介绍：当栏目类型为单页面时，选择模板后添加内容就可以了，当然你需要在模板里用标签获取到添加的内容才能展示。</li>
+      				     </ul>
+      				  </li>
+      				  <li><span class="bigcatalog">六.乐之者cms的标签</span>：     
+      					在模板中需要使用cms标签获取数据，标签使用方法参考栏目<a href="<zdw:index_path/>/s/cmsbqck/">cms标签参考</a>
+      				  </li>
+      				</ul>
+      				基本的理论概念搞懂之后呢，就可以下载和安装以及使用了。详细可参考<a href="<zdw:index_path/>/s/spjc/lzzcmssyspjc/">乐之者cms使用视频教程</a>栏目的视频教
+      				程。以下是使用流程：
+      				<p>1.<a href="http://www.roadjava.com/s/ddjl/2017/08/jdkaz.html">jdk的安装</a></p>
+      				<p>2.<a href="http://www.roadjava.com/s/ddjl/2017/08/tomcatrqdaz.html">tomcat的安装</a></p>
+      				<p>3.<a href="http://www.roadjava.com/s/ddjl/2017/08/mysql5529daz.html">mysql的安装</a></p>
+      				<p>4.下载乐之者cms，放入tomcat容器的webapps文件夹，并启动tomcat，待启动完成后，输入：http://localhost:8080/lzzcms/install即可进入安装
+      				界面，之后按照提示进行就行了。</p>
+     				</section>
+    				</div>
+    				<div id="versionchange">
+    					<h4 >版本变更</h4>
+     				<section class="cont">
+     					2017-08-03:乐之者内容管理系统(乐之者cms)v1.0.0上线
+     					<div class="paddingleft">
+     						变更内容：
+     						<section class="change">cmsv1.0.0建立，具备cms基本功能</section>
+     					</div>
+     					2017-11-02:乐之者内容管理系统(乐之者cms)v1.1.0更新
+     					<div class="paddingleft">
+     						变更内容：
+     						<section class="change">
+     							1.修改备份还原逻辑，修正了因特殊字符的存在而不能还原成功的问题
+     							2.文档公共部分增加最近修改字段
+     							3.更新安装初始化sql文件
+     							4.修改doclist标签通过publishdate排序不准确的问题
+     							4.编辑内容发布日期不可修改，修改最近修改日期
+     						</section>
+     					</div>
+     				</section>
+    				</div>
+    			</section>
+    		</div><!-- class="row" -->
+   		<zdw:include file="foot.html"/>
+   	</div><!-- class="container" -->
+<script type="text/javascript">
+var $root = $('html, body');
+$('body').on("click","a[href^=#]",function() {
+    $root.animate({
+         scrollTop: $($(this).attr('href')).offset().top-50
+     }, 500);
+     return false;
+ });
+
+</script>
+  </body>
+</html>

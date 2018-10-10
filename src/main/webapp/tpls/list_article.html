@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	 <link rel="shortcut icon" href="<zdw:tpl_path/>/imgs/favicon.ico" type="image/x-icon">
+    <title><zdw:field name="clntitle"/></title>
+    <meta name="keywords" content="<zdw:field name='clnkeywords'/>" />
+    <meta name="description" content="<zdw:field name='clndesc'/>" />
+    <link href="<zdw:tpl_path/>/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<zdw:tpl_path/>/style/common.css" rel="stylesheet">
+    <link href="<zdw:tpl_path/>/style/list_article.css" rel="stylesheet">
+     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+	<div class="container-fluid"> 
+		<section class="row topsec">
+		   <zdw:include file="head.html"/>
+		  	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		  	   <ol class="breadcrumb">		
+					<zdw:pathlist>
+					  <li><a href='<zdw:path name="link"/>'><zdw:path name="name"/></a></li>
+					</zdw:pathlist> 
+					<li class="download">
+						<a href="<zdw:global_field name='lzzcms_downloadurl'/>">下载最新版乐之者内容管理系统(乐之者cms)</a>
+					</li>
+			   </ol> 
+		  	</div>
+		</section>
+   	     <div class="row">
+   			<div class="col-md-8">
+   				<ul class="articlelist">
+	    			<zdw:doclist count="20" sortby="publishdate"  sort="desc">
+	    			  <div class="row">
+	    			  	<li>
+	    			  		<section class="hidden-xs col-sm-2 col-md-2 col-lg-2"></section>
+    			  			<section class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+    			  				<span class="circle"></span>
+	    			  			 <span>
+									  <a href='<zdw:field name="docurl"/>'><zdw:field name="comm_title"/></a>
+								 </span>
+	    			  		</section>
+	    			  		<section class="hidden-xs col-sm-2 col-md-2 col-lg-2">
+						  		<span><zdw:field name="comm_publishdate"/></span>	
+	    			  		</section>
+   			  			</li> 
+	    			  </div>
+					</zdw:doclist>
+   				</ul>
+   				<div id="pg">	
+   					<zdw:pager/>
+		       </div>	
+   			</div>
+   			<div class="col-md-4 info_right hidden-xs hidden-sm">
+     			  <section  class="tagstyle">热门资讯</section>
+   				  <zdw:doclist count="5" sortby="click" sort="desc" columns="all">
+	    				<div class="row info_right_row">
+	    					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 nopadding">
+	    						<a href='<zdw:field name="docurl"/>'>
+	    							<img src="<zdw:field name='comm_thumbpic'/>" class="img-responsive center-block">
+	    						</a>	
+	    					</div>
+	    					<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 info_right_content">
+	    						<div class="conttitle">
+	    							<a href="<zdw:field name='docurl'/>"><zdw:field name="comm_title"/></a>
+	    						</div>
+	    						<div>发布日期:<zdw:field name="comm_publishdate"/></div>
+	    					</div>
+	    				</div>
+    			   </zdw:doclist>
+   			    </div>
+   		     </div>
+		<zdw:include file="foot.html"/>
+	</div>
+  <script type="text/javascript">
+	//通过分页返回的内容给分页加上自己的样式  
+	var ps=document.getElementsByClassName("pagerul")[0]; 
+	ps.className+=" pagination";
+	ps.className+=" pagination-sm";
+  </script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.lzzcms.model">
+    <class name="CommonContent" table="lzz_commoncontent"  dynamic-update="true" dynamic-insert="true">
+        <id name="id" column="comm_id">
+            <generator class="native">
+            </generator>
+        </id>
+        <property name="title" type="string" length="150" column="comm_title"/>
+        <property name="shortTitle" type="string" length="100" column="comm_shorttitle"/>
+        <property name="click" type="int" column="comm_click"/>
+        <many-to-one name="author" class="SystemParam" column="comm_author" />
+        <property name="publishDate" type="timestamp"  column="comm_publishdate"/>
+        <property name="keyWords" type="string" length="200" column="comm_keywords"/>
+        <property name="desc" type="string" length="200" column="comm_desc"/>
+        <many-to-one name="src" class="SystemParam" column="comm_src" />
+        <property name="thumbPic" type="string" length="100" column="comm_thumbpic"/>
+         <many-to-one name="defineFlag" class="SystemParam" column="comm_defineflag" />
+        <property name="intro" type="string" length="250" column="comm_intro"/>
+        <property name="htmlPath" type="string" length="250" column="comm_htmlpath"/>
+        <many-to-one name="columnInfo" class="ColumnInfo" column="column_id" />
+    </class>
+</hibernate-mapping>
+
